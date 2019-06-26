@@ -35,12 +35,12 @@ class GZXTopBar extends StatelessWidget {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
     return Container(
       color: Theme.of(context).primaryColor,
-      padding: EdgeInsets.only(top: statusBarHeight, left: 0, right: 0, bottom: 0),
+      padding:
+          EdgeInsets.only(top: statusBarHeight, left: 0, right: 0, bottom: 0),
       child: Row(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(right: 6.0,left: 4),
-//            color: Colors.red,
+            margin: EdgeInsets.only(right: 6.0, left: 4),
             height: 30,
             width: 30,
             child: Column(
@@ -66,12 +66,11 @@ class GZXTopBar extends StatelessWidget {
               ],
             ),
           ),
-
           Expanded(
             flex: 1,
             child: GZXSearchCardWidget(
               elevation: 0,
-              onTap: (){
+              onTap: () {
                 FocusScope.of(context).requestFocus(FocusNode());
                 NavigatorUtils.gotoSearchGoodsPage(_context);
               },
@@ -79,10 +78,8 @@ class GZXTopBar extends StatelessWidget {
               focusNode: _focus,
             ),
           ),
-
           Container(
-            margin: EdgeInsets.only(left: 6.0,right: 4),
-//            color: Colors.red,
+            margin: EdgeInsets.only(left: 6.0, right: 4),
             width: 30,
             height: 30,
             child: Column(
@@ -108,14 +105,6 @@ class GZXTopBar extends StatelessWidget {
               ],
             ),
           ),
-//          Container(
-//            margin: EdgeInsets.only(left: 6.0),
-//            child: Icon(
-//              Icons.add_alert,
-//              size: 25.0,
-//              color: Color.fromRGBO(132, 95, 63, 1.0),
-//            ),
-//          )
         ],
       ),
     );

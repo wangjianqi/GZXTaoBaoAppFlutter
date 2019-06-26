@@ -115,9 +115,6 @@ class _HomePageState extends State<HomePage>
   _afterLayout(_) {
     _getPositions('_keyFilter', _keyFilter);
     _getSizes('_keyFilter', _keyFilter);
-
-//    _getPositions('_keyDropDownItem', _keyDropDownItem);
-//    _getSizes('_keyDropDownItem', _keyDropDownItem);
   }
 
   _getPositions(log, GlobalKey globalKey) {
@@ -448,6 +445,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  ///广告图
   Widget _buildAdvertisingWidget() {
     return Container(
       margin: EdgeInsets.only(left: 8, top: 0, right: 8, bottom: 10),
@@ -476,7 +474,6 @@ class _HomePageState extends State<HomePage>
 //      return;
 //    }
     print('_handleTabSelection:${_controller.index}');
-//return;
     setState(() {
       _currentIndex = _controller.index;
     });
@@ -496,7 +493,6 @@ class _HomePageState extends State<HomePage>
     return pages;
   }
 
-  double _lastScrollPixels = 0;
 
   bool _onScroll(ScrollNotification scroll) {
     return false;
@@ -505,9 +501,6 @@ class _HomePageState extends State<HomePage>
   Widget _buildRecommendedCard() {
     Positioned unReadMsgCountText = Positioned(
       child: Container(
-//        width: 10.0,
-//        height: 10.0,
-//        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20 / 2.0), color: Color(0xffff3e3e)),
         child: AnimatedBuilder(
             animation: _animationController,
             builder: (_, Widget child) {

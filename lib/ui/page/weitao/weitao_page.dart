@@ -10,9 +10,7 @@ import 'package:flutter_taobao/common/model/search.dart';
 import 'package:flutter_taobao/common/services/meinv.dart';
 import 'package:flutter_taobao/common/services/search.dart';
 import 'package:flutter_taobao/common/style/gzx_style.dart';
-import 'package:flutter_taobao/common/utils/common_utils.dart';
 import 'package:flutter_taobao/common/utils/screen_util.dart';
-import 'package:flutter_taobao/ui/page/home/search_suggest_page.dart';
 import 'package:flutter_taobao/ui/page/weitao/weitao_list_page.dart';
 
 class WeiTaoPage extends StatefulWidget {
@@ -40,7 +38,6 @@ class _WeiTaoPageState extends State<WeiTaoPage>
               children: <Widget>[
                 Text(
                   post.name,
-//                  style: Theme.of(context).textTheme.body1.apply(fontWeightDelta: 100),
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
                 SizedBox(
@@ -382,8 +379,10 @@ class _WeiTaoPageState extends State<WeiTaoPage>
     return Random().nextInt(1000);
   }
 
+  @override
   void dispose() {
     postController?.close();
+    super.dispose();
   }
 
   @override
@@ -439,17 +438,13 @@ class _WeiTaoPageState extends State<WeiTaoPage>
             top: _topBarTop,
             width: ScreenUtil.screenWidth,
             child: Container(
-//              color: Colors.red,
               height: _topBarHeight,
               child: _buildTopBar(),
-//              height: 48,
             ),
-//            child: _buildTopBar(),
           ),
           AnimatedPositioned(
             curve: Curves.easeInOut,
             duration: const Duration(milliseconds: 500),
-//            top: (ScreenUtil.screenHeight / 4) / 2,
             top: _tabControllerTop,
             left: 0,
             width: ScreenUtil.screenWidth,
@@ -592,10 +587,7 @@ class _WeiTaoPageState extends State<WeiTaoPage>
         labelPadding: EdgeInsets.only(left: 40, right: 40),
         labelStyle: TextStyle(fontSize: 12),
         onTap: (i) {
-          print('tabBar onTap ${i}');
-//            _selectedIndex = i;
-//
-//            setState(() {});
+
         },
         tabs: _tabsTitle
             .map((i) => Text(
@@ -636,6 +628,5 @@ class _WeiTaoPageState extends State<WeiTaoPage>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

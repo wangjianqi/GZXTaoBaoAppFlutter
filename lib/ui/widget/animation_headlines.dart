@@ -6,32 +6,30 @@ import 'package:flutter_taobao/common/data/home.dart';
 
 class AnimationHeadlinesWidget extends StatefulWidget {
   @override
-  _AnimationHeadlinesWidgetState createState() => _AnimationHeadlinesWidgetState();
+  _AnimationHeadlinesWidgetState createState() =>
+      _AnimationHeadlinesWidgetState();
 }
 
 class _AnimationHeadlinesWidgetState extends State<AnimationHeadlinesWidget> {
-
   int _diffScaleNext = 0;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
-    Timer _countdownTimer = new Timer.periodic(new Duration(seconds: 3), (timer) {
-//      print('countdownTimer.tick');
-      if(mounted){
+    ///定时器
+    Timer _countdownTimer =
+        new Timer.periodic(new Duration(seconds: 3), (timer) {
+      if (mounted) {
         setState(() {
           _diffScaleNext++;
         });
       }
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Row(children: <Widget>[
       SizedBox(
         width: 8,
@@ -61,13 +59,9 @@ class _AnimationHeadlinesWidgetState extends State<AnimationHeadlinesWidget> {
       ),
       Expanded(
           child: GestureDetector(
-              onTap: () {
-//    setState(() {
-//    _diffScaleNext++;
-//    });
-              },
+              onTap: () {},
               child: Container(
-//              color: bgColor,
+                ///动态文字
                 child: DiffScaleText(
                   text: headlines[_diffScaleNext % headlines.length],
                   textStyle: TextStyle(fontSize: 12, color: Colors.black),

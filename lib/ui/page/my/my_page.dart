@@ -1,24 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:flutter_taobao/common/data/my.dart';
-import 'package:flutter_taobao/common/data/shopping_cart.dart';
 import 'package:flutter_taobao/common/model/conversation.dart';
-import 'package:flutter_taobao/common/model/shopping_cart.dart';
-import 'package:flutter_taobao/common/services/search.dart';
 import 'package:flutter_taobao/common/style/gzx_style.dart';
 import 'package:flutter_taobao/common/utils/common_utils.dart';
-import 'package:flutter_taobao/common/utils/navigator_utils.dart';
 import 'package:flutter_taobao/common/utils/screen_util.dart';
-import 'package:flutter_taobao/ui/widget/GZXUserIconWidget.dart';
 import 'package:flutter_taobao/ui/widget/gzx_card.dart';
-import 'package:flutter_taobao/ui/widget/gzx_checkbox.dart';
 import 'package:flutter_taobao/ui/widget/pull_load/ListState.dart';
 import 'package:flutter_taobao/ui/widget/pull_load/PullLoadWidget.dart';
-import 'dart:math';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
-import 'package:flutter_taobao/ui/widget/gzx_shopping_cart_item.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info/package_info.dart';
 
 class MyPage extends StatefulWidget {
@@ -27,10 +16,13 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage>
-    with AutomaticKeepAliveClientMixin<MyPage>, ListState<MyPage>, WidgetsBindingObserver {
+    with
+        AutomaticKeepAliveClientMixin<MyPage>,
+        ListState<MyPage>,
+        WidgetsBindingObserver {
   static const Color _backgroundColor = Color(0xFFf3f3f3);
-  Gradient _mainGradient = const LinearGradient(colors: [_backgroundColor, _backgroundColor]);
-  bool _isAllSelected = false;
+  Gradient _mainGradient =
+      const LinearGradient(colors: [_backgroundColor, _backgroundColor]);
 
   GlobalKey _keyFilter = GlobalKey();
   double _firstItemHeight = 0;
@@ -65,6 +57,7 @@ class _MyPageState extends State<MyPage>
     super.didChangeAppLifecycleState(state);
   }
 
+  ///build
   @override
   Widget build(BuildContext context) {
     _context = context;
@@ -85,7 +78,6 @@ class _MyPageState extends State<MyPage>
             break;
           case 1:
             return _buildContent();
-//return Container();
             break;
         }
         return Container();
@@ -113,10 +105,10 @@ class _MyPageState extends State<MyPage>
                 Offstage(
                   offstage: !_isShowFloatingTopBar,
                   child: Container(
-                    decoration: BoxDecoration(gradient: GZXColors.primaryGradient),
+                    decoration:
+                        BoxDecoration(gradient: GZXColors.primaryGradient),
                     height: 48 + ScreenUtil.statusBarHeight,
                     width: ScreenUtil.screenWidth,
-//                margin: EdgeInsets.only(top: ScreenUtil.statusBarHeight),
                     child: Column(
                       children: <Widget>[
                         SizedBox(
@@ -200,7 +192,9 @@ class _MyPageState extends State<MyPage>
           customChildren: <Widget>[
             Container(
               padding: EdgeInsets.only(left: 12, right: 12),
-              decoration: BoxDecoration(border: Border(right: BorderSide(color: Color(0xFFeeede6), width: 1))),
+              decoration: BoxDecoration(
+                  border: Border(
+                      right: BorderSide(color: Color(0xFFeeede6), width: 1))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -217,7 +211,8 @@ class _MyPageState extends State<MyPage>
                       ),
                       Text(
                         '全新上线梯度赛',
-                        style: TextStyle(fontSize: 12, color: Color(0xFF5b5b5b)),
+                        style:
+                            TextStyle(fontSize: 12, color: Color(0xFF5b5b5b)),
                       ),
                     ],
                   ),
@@ -247,7 +242,8 @@ class _MyPageState extends State<MyPage>
                       ),
                       Text(
                         '守护濒危动物',
-                        style: TextStyle(fontSize: 12, color: Color(0xFF5b5b5b)),
+                        style:
+                            TextStyle(fontSize: 12, color: Color(0xFF5b5b5b)),
                       ),
                     ],
                   ),
@@ -322,15 +318,18 @@ class _MyPageState extends State<MyPage>
                     children: <Widget>[
                       Text(
                         '已绑定 ',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF5b5b5b)),
+                        style:
+                            TextStyle(fontSize: 13, color: Color(0xFF5b5b5b)),
                       ),
                       Text(
                         '1',
-                        style: TextStyle(fontSize: 13, color: Color(0xFFfb4f00)),
+                        style:
+                            TextStyle(fontSize: 13, color: Color(0xFFfb4f00)),
                       ),
                       Text(
                         ' 位家人',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF5b5b5b)),
+                        style:
+                            TextStyle(fontSize: 13, color: Color(0xFF5b5b5b)),
                       ),
                     ],
                   )
@@ -374,7 +373,6 @@ class _MyPageState extends State<MyPage>
             Container(
               padding: EdgeInsets.only(left: 12, right: 12),
               alignment: Alignment.center,
-//                decoration: BoxDecoration(border: Border(right: BorderSide(color: Color(0xFFeeede6), width: 1))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -385,13 +383,15 @@ class _MyPageState extends State<MyPage>
                     children: <Widget>[
                       Text(
                         '567.10',
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 28, color: Color(0xFF118ee9)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 28,
+                            color: Color(0xFF118ee9)),
                       ),
                       SizedBox(
                         width: 3,
                       ),
                       Container(
-//                              color: Colors.red,
                         child: Text(
                           '元',
                           style: TextStyle(color: Color(0xFF118ee9)),
@@ -419,7 +419,6 @@ class _MyPageState extends State<MyPage>
             Container(
               padding: EdgeInsets.only(left: 12, right: 12),
               alignment: Alignment.center,
-//                decoration: BoxDecoration(border: Border(right: BorderSide(color: Color(0xFFeeede6), width: 1))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -430,13 +429,15 @@ class _MyPageState extends State<MyPage>
                     children: <Widget>[
                       Text(
                         '1.75',
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 28, color: Color(0xFF118ee9)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 28,
+                            color: Color(0xFF118ee9)),
                       ),
                       SizedBox(
                         width: 3,
                       ),
                       Container(
-//                              color: Colors.red,
                         child: Text(
                           '万元',
                           style: TextStyle(color: Color(0xFF118ee9)),
@@ -476,7 +477,6 @@ class _MyPageState extends State<MyPage>
             Container(
               padding: EdgeInsets.only(left: 12, right: 12),
               alignment: Alignment.center,
-//                decoration: BoxDecoration(border: Border(right: BorderSide(color: Color(0xFFeeede6), width: 1))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -487,13 +487,15 @@ class _MyPageState extends State<MyPage>
                     children: <Widget>[
                       Text(
                         '967',
-                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 28, color: Color(0xFFfe4f02)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 28,
+                            color: Color(0xFFfe4f02)),
                       ),
                       SizedBox(
                         width: 3,
                       ),
                       Container(
-//                              color: Colors.red,
                         child: Icon(
                           Icons.arrow_upward,
                           color: Color(0xFFfe4f02),
@@ -521,7 +523,6 @@ class _MyPageState extends State<MyPage>
             Container(
               padding: EdgeInsets.only(left: 12, right: 12),
               alignment: Alignment.center,
-//                decoration: BoxDecoration(border: Border(right: BorderSide(color: Color(0xFFeeede6), width: 1))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -559,7 +560,6 @@ class _MyPageState extends State<MyPage>
             Container(
               padding: EdgeInsets.only(left: 12, right: 12),
               alignment: Alignment.center,
-//                decoration: BoxDecoration(border: Border(right: BorderSide(color: Color(0xFFeeede6), width: 1))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -589,14 +589,16 @@ class _MyPageState extends State<MyPage>
             Container(
               padding: EdgeInsets.only(left: 12, right: 12),
               alignment: Alignment.center,
-//                decoration: BoxDecoration(border: Border(right: BorderSide(color: Color(0xFFeeede6), width: 1))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     '减肥健身管理',
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18, color: Color(0xFF00c8aa)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        color: Color(0xFF00c8aa)),
                   ),
                   SizedBox(
                     height: 16,
@@ -625,7 +627,6 @@ class _MyPageState extends State<MyPage>
     return Stack(
       children: <Widget>[
         Container(
-//          color: Colors.blue,
           alignment: Alignment.center,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -681,7 +682,8 @@ class _MyPageState extends State<MyPage>
     if (currentExtent - _lastScrollPixels > 0) {
       if (currentExtent >= 0 && _mainGradient == GZXColors.primaryGradient) {
         setState(() {
-          _mainGradient = const LinearGradient(colors: [Colors.white, Colors.white]);
+          _mainGradient =
+              const LinearGradient(colors: [Colors.white, Colors.white]);
         });
       }
       if (currentExtent <= 20) {
@@ -777,7 +779,8 @@ class _MyPageState extends State<MyPage>
     await getIndexListData(page);
     setState(() {
       // 3次加载数据
-      pullLoadWidgetControl.needLoadMore = (mockConversation != null && mockConversation.length < 25);
+      pullLoadWidgetControl.needLoadMore =
+          (mockConversation != null && mockConversation.length < 25);
     });
     isLoading = false;
     return null;
@@ -785,7 +788,6 @@ class _MyPageState extends State<MyPage>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 //    WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
 
@@ -807,7 +809,6 @@ class _MyPageState extends State<MyPage>
 
   @override
   void setState(fn) {
-    // TODO: implement setState
     super.setState(fn);
   }
 
@@ -831,7 +832,12 @@ class TopItem extends StatelessWidget {
   double _topBarHeight = 48;
   BuildContext _context;
 
-  TopItem({Key key, this.isShowFloatingTopBar = false, this.topBarOpacity = 1, this.productNum = 0, this.contentWidget})
+  TopItem(
+      {Key key,
+      this.isShowFloatingTopBar = false,
+      this.topBarOpacity = 1,
+      this.productNum = 0,
+      this.contentWidget})
       : super(key: key);
 
   @override
@@ -890,7 +896,8 @@ class TopItem extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     height: 20,
-                    decoration: BoxDecoration(gradient: GZXColors.primaryGradient),
+                    decoration:
+                        BoxDecoration(gradient: GZXColors.primaryGradient),
                   ),
                   Container(
 //                    decoration: BoxDecoration(gradient: GZXColors.primaryGradient),
@@ -901,7 +908,9 @@ class TopItem extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Card(
                         elevation: 0,
-                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12.0))),
                         //设置圆角
                         child: Container(
                           padding: EdgeInsets.all(10),
@@ -915,25 +924,32 @@ class TopItem extends StatelessWidget {
                               Container(
                                 padding: EdgeInsets.only(left: 14),
                                 decoration: BoxDecoration(
-                                  border: Border(left: BorderSide(color: Color(0xFFedeeed), width: 1)),
+                                  border: Border(
+                                      left: BorderSide(
+                                          color: Color(0xFFedeeed), width: 1)),
 //                              color: Colors.red,
                                 ),
                                 child: Row(
                                   children: <Widget>[
                                     Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
                                           '兑天猫超市5元代金券',
-                                          style: TextStyle(color: Color(0xFF666666)),
+                                          style: TextStyle(
+                                              color: Color(0xFF666666)),
                                         ),
                                         SizedBox(
                                           height: 4,
                                         ),
                                         Text(
                                           '会员专享 每周可兑',
-                                          style: TextStyle(color: Color(0xFF666666), fontSize: 12),
+                                          style: TextStyle(
+                                              color: Color(0xFF666666),
+                                              fontSize: 12),
                                         )
                                       ],
                                     )
@@ -989,7 +1005,8 @@ class TopItem extends StatelessWidget {
     );
   }
 
-  Widget _circleButton(Color imageBackgroundColor, IconData iconData, text, int unreadMessages) {
+  Widget _circleButton(
+      Color imageBackgroundColor, IconData iconData, text, int unreadMessages) {
     return Container(
 //      color: Colors.red,
       width: 50,
@@ -1034,7 +1051,10 @@ class TopItem extends StatelessWidget {
                     color: Color(0xffff3e3e)),
                 child: Text(
                   '${unreadMessages}',
-                  style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Color(0xffffffff)),
+                  style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffffffff)),
                 ),
               ),
             ),
@@ -1077,7 +1097,10 @@ class TopItem extends StatelessWidget {
             children: <Widget>[
               Text(
                 '追忆失去的心',
-                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
               Container(
                 height: 24,
@@ -1130,7 +1153,8 @@ class TopItem extends StatelessWidget {
                 onTap: () async {
                   PackageInfo packageInfo = await PackageInfo.fromPlatform();
                   var appVersion = packageInfo.version;
-                  CommonUtils.showPromptDialog(_context, '', '当前版本V$appVersion');
+                  CommonUtils.showPromptDialog(
+                      _context, '', '当前版本V$appVersion');
                 },
                 child: Icon(
                   Icons.settings,

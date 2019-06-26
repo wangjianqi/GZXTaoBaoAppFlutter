@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:flutter_taobao/common/data/shopping_cart.dart';
 import 'package:flutter_taobao/common/model/conversation.dart';
 import 'package:flutter_taobao/common/model/shopping_cart.dart';
-import 'package:flutter_taobao/common/services/search.dart';
 import 'package:flutter_taobao/common/style/gzx_style.dart';
 import 'package:flutter_taobao/common/utils/common_utils.dart';
 import 'package:flutter_taobao/common/utils/navigator_utils.dart';
 import 'package:flutter_taobao/common/utils/screen_util.dart';
 import 'package:flutter_taobao/ui/widget/GZXUserIconWidget.dart';
 import 'package:flutter_taobao/ui/widget/gzx_checkbox.dart';
+import 'package:flutter_taobao/ui/widget/gzx_shopping_cart_item.dart';
 import 'package:flutter_taobao/ui/widget/pull_load/ListState.dart';
 import 'package:flutter_taobao/ui/widget/pull_load/PullLoadWidget.dart';
-import 'dart:math';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
-import 'package:flutter_taobao/ui/widget/gzx_shopping_cart_item.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ShoppingCartPage extends StatefulWidget {
@@ -23,9 +20,13 @@ class ShoppingCartPage extends StatefulWidget {
 }
 
 class _ShoppingCartPageState extends State<ShoppingCartPage>
-    with AutomaticKeepAliveClientMixin<ShoppingCartPage>, ListState<ShoppingCartPage>, WidgetsBindingObserver {
+    with
+        AutomaticKeepAliveClientMixin<ShoppingCartPage>,
+        ListState<ShoppingCartPage>,
+        WidgetsBindingObserver {
   static const Color _backgroundColor = Color(0xFFf3f3f3);
-  Gradient _mainGradient = const LinearGradient(colors: [_backgroundColor, _backgroundColor]);
+  Gradient _mainGradient =
+      const LinearGradient(colors: [_backgroundColor, _backgroundColor]);
   bool _isAllSelected = false;
 
   GlobalKey _keyFilter = GlobalKey();
@@ -70,7 +71,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
       color: Colors.transparent,
       addTap: (orderModel) {
         if (orderModel.quantity + 1 > orderModel.amountPurchasing) {
-          Fluttertoast.showToast(msg: '该宝贝不能购买更多哦', gravity: ToastGravity.CENTER);
+          Fluttertoast.showToast(
+              msg: '该宝贝不能购买更多哦', gravity: ToastGravity.CENTER);
         } else {
           setState(() {
             orderModel.quantity++;
@@ -79,7 +81,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
       },
       removeTap: (orderModel) {
         if (orderModel.quantity == 1) {
-          Fluttertoast.showToast(msg: '受不了了，宝贝不能再减少了哦', gravity: ToastGravity.CENTER);
+          Fluttertoast.showToast(
+              msg: '受不了了，宝贝不能再减少了哦', gravity: ToastGravity.CENTER);
         } else {
           setState(() {
             orderModel.quantity--;
@@ -97,39 +100,36 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
       onSelectChanged: (orderModel, value) {
         setState(() {
           orderModel.isSelected = value;
-//                shoppingCartModel.isSelected=value;
         });
       },
     );
 
-    var testWidget = Container(
-        color: Colors.red,
-        key: _keyFilter,
-//      height: _firstItemHeight + 50,
-        child: firstItemWidget);
+    var testWidget =
+        Container(color: Colors.red, key: _keyFilter, child: firstItemWidget);
 
     var pullLoadWidget = PullLoadWidget(
       pullLoadWidgetControl,
       (BuildContext context, int index) {
-        ShoppingCartModel shoppingCartModel = pullLoadWidgetControl.dataList[index];
+        ShoppingCartModel shoppingCartModel =
+            pullLoadWidgetControl.dataList[index];
         print('$index');
 
         if (index == 0) {
           return Container(
               color: _backgroundColor,
-//          color: Colors.red,
               height: _firstItemHeight + 48 + ScreenUtil.statusBarHeight + 20,
               child: TopItem(
                   topBarOpacity: _topBarOpacity,
                   contentWidgetHeight: _firstItemHeight,
-//contentWidget: Container(height: 44,color: Colors.white,width: 100,),
                   contentWidget: Container(
                       child: GZXShoppingCarItemWidget(
                     shoppingCartModels[0],
                     color: Colors.transparent,
                     addTap: (orderModel) {
-                      if (orderModel.quantity + 1 > orderModel.amountPurchasing) {
-                        Fluttertoast.showToast(msg: '该宝贝不能购买更多哦', gravity: ToastGravity.CENTER);
+                      if (orderModel.quantity + 1 >
+                          orderModel.amountPurchasing) {
+                        Fluttertoast.showToast(
+                            msg: '该宝贝不能购买更多哦', gravity: ToastGravity.CENTER);
                       } else {
                         setState(() {
                           orderModel.quantity++;
@@ -138,7 +138,9 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
                     },
                     removeTap: (orderModel) {
                       if (orderModel.quantity == 1) {
-                        Fluttertoast.showToast(msg: '受不了了，宝贝不能再减少了哦', gravity: ToastGravity.CENTER);
+                        Fluttertoast.showToast(
+                            msg: '受不了了，宝贝不能再减少了哦',
+                            gravity: ToastGravity.CENTER);
                       } else {
                         setState(() {
                           orderModel.quantity--;
@@ -156,7 +158,6 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
                     onSelectChanged: (orderModel, value) {
                       setState(() {
                         orderModel.isSelected = value;
-//                shoppingCartModel.isSelected=value;
                       });
                     },
                   ))));
@@ -165,7 +166,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
             shoppingCartModel,
             addTap: (orderModel) {
               if (orderModel.quantity + 1 > orderModel.amountPurchasing) {
-                Fluttertoast.showToast(msg: '该宝贝不能购买更多哦', gravity: ToastGravity.CENTER);
+                Fluttertoast.showToast(
+                    msg: '该宝贝不能购买更多哦', gravity: ToastGravity.CENTER);
               } else {
                 setState(() {
                   orderModel.quantity++;
@@ -174,7 +176,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
             },
             removeTap: (orderModel) {
               if (orderModel.quantity == 1) {
-                Fluttertoast.showToast(msg: '受不了了，宝贝不能再减少了哦', gravity: ToastGravity.CENTER);
+                Fluttertoast.showToast(
+                    msg: '受不了了，宝贝不能再减少了哦', gravity: ToastGravity.CENTER);
               } else {
                 setState(() {
                   orderModel.quantity--;
@@ -192,7 +195,6 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
             onSelectChanged: (orderModel, value) {
               setState(() {
                 orderModel.isSelected = value;
-//                shoppingCartModel.isSelected=value;
               });
             },
           );
@@ -221,10 +223,10 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
                 Offstage(
                   offstage: !_isShowFloatingTopBar,
                   child: Container(
-                    decoration: BoxDecoration(gradient: GZXColors.primaryGradient),
+                    decoration:
+                        BoxDecoration(gradient: GZXColors.primaryGradient),
                     height: 48 + ScreenUtil.statusBarHeight,
                     width: ScreenUtil.screenWidth,
-//                margin: EdgeInsets.only(top: ScreenUtil.statusBarHeight),
                     child: Column(
                       children: <Widget>[
                         SizedBox(
@@ -245,6 +247,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
     );
 
     double totalAmount = 0;
+    ///选中的数量
     int settlementCount = 0;
     for (var value1 in shoppingCartModels) {
       for (var value in value1.orderModels) {
@@ -268,7 +271,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
           Container(
             height: 44,
             decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: Color(0xFFededed), width: .3)),
+              border:
+                  Border(top: BorderSide(color: Color(0xFFededed), width: .3)),
             ),
             child: Row(
               children: <Widget>[
@@ -351,7 +355,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
   }
 
   Widget _buildFloatingTopBar({int productNum = 0}) {
-    var list = shoppingCartModels.map((item) => item.orderModels.length).toList();
+    var list =
+        shoppingCartModels.map((item) => item.orderModels.length).toList();
     var count = list.reduce((value, element) {
       print('reduce $value  $element}');
       return value + element;
@@ -359,7 +364,6 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
     return Stack(
       children: <Widget>[
         Container(
-//          color: Colors.blue,
           alignment: Alignment.center,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -415,7 +419,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
     if (currentExtent - _lastScrollPixels > 0) {
       if (currentExtent >= 0 && _mainGradient == GZXColors.primaryGradient) {
         setState(() {
-          _mainGradient = const LinearGradient(colors: [Colors.white, Colors.white]);
+          _mainGradient =
+              const LinearGradient(colors: [Colors.white, Colors.white]);
         });
       }
       if (currentExtent <= 20) {
@@ -511,7 +516,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
     await getIndexListData(page);
     setState(() {
       // 3次加载数据
-      pullLoadWidgetControl.needLoadMore = (mockConversation != null && mockConversation.length < 25);
+      pullLoadWidgetControl.needLoadMore =
+          (mockConversation != null && mockConversation.length < 25);
     });
     isLoading = false;
     return null;
@@ -519,7 +525,6 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
 
@@ -626,7 +631,8 @@ class TopItem extends StatelessWidget {
     ]));
   }
 
-  Widget _circleButton(Color imageBackgroundColor, IconData iconData, text, int unreadMessages) {
+  Widget _circleButton(
+      Color imageBackgroundColor, IconData iconData, text, int unreadMessages) {
     return Container(
 //      color: Colors.red,
       width: 50,
@@ -671,7 +677,10 @@ class TopItem extends StatelessWidget {
                     color: Color(0xffff3e3e)),
                 child: Text(
                   '${unreadMessages}',
-                  style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Color(0xffffffff)),
+                  style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffffffff)),
                 ),
               ),
             ),
@@ -690,7 +699,8 @@ class TopItem extends StatelessWidget {
         Expanded(
           child: Text(
             '购物车',
-            style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: Colors.white),
+            style: TextStyle(
+                fontSize: 19, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
         GestureDetector(
@@ -736,10 +746,15 @@ class _ConversationItem extends StatelessWidget {
           width: 18.0,
           height: 18.0,
           alignment: Alignment.center,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20 / 2.0), color: Color(0xffff3e3e)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20 / 2.0),
+              color: Color(0xffff3e3e)),
           child: Text(
             conversation.unReadMsgCount.toString(),
-            style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Color(0xffffffff)),
+            style: TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold,
+                color: Color(0xffffffff)),
           ),
         ),
         right: 0.0,
@@ -750,7 +765,9 @@ class _ConversationItem extends StatelessWidget {
         child: Container(
           width: 10.0,
           height: 10.0,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20 / 2.0), color: Color(0xffff3e3e)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20 / 2.0),
+              color: Color(0xffff3e3e)),
         ),
         right: 2.0,
         top: -5.0,
@@ -773,7 +790,8 @@ class _ConversationItem extends StatelessWidget {
       height: 75,
       child: RawMaterialButton(
         onPressed: () {
-          NavigatorUtils.gotoGZXChatPage(context, conversation).whenComplete(() {
+          NavigatorUtils.gotoGZXChatPage(context, conversation)
+              .whenComplete(() {
             FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
           });
         },
@@ -796,20 +814,27 @@ class _ConversationItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         conversation.title,
-                        style: TextStyle(fontSize: 14.5, color: Color(conversation.titleColor)),
+                        style: TextStyle(
+                            fontSize: 14.5,
+                            color: Color(conversation.titleColor)),
                       ),
                       conversation.type == null
                           ? Container()
                           : Container(
-                              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4, vertical: 2),
 //                              width: 18.0,
                               height: 18.0,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20 / 2.0), color: Color(0xFFf1f1f1)),
+                                  borderRadius: BorderRadius.circular(20 / 2.0),
+                                  color: Color(0xFFf1f1f1)),
                               child: Text(
                                 conversation.type,
-                                style: TextStyle(fontSize: 8.0, fontWeight: FontWeight.bold, color: Color(0xFF9c9c9c)),
+                                style: TextStyle(
+                                    fontSize: 8.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF9c9c9c)),
                               ),
                             )
                     ],
@@ -834,7 +859,8 @@ class _ConversationItem extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       conversation.createAt,
-                      style: TextStyle(color: Color(0xffBEBEBE), fontSize: 13.0),
+                      style:
+                          TextStyle(color: Color(0xffBEBEBE), fontSize: 13.0),
                     ),
                     SizedBox(
                       height: 8,
@@ -845,11 +871,15 @@ class _ConversationItem extends StatelessWidget {
                             width: 18.0,
                             height: 18.0,
                             alignment: Alignment.center,
-                            decoration:
-                                BoxDecoration(borderRadius: BorderRadius.circular(20 / 2.0), color: Color(0xffff3e3e)),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20 / 2.0),
+                                color: Color(0xffff3e3e)),
                             child: Text(
                               conversation.unReadMsgCount.toString(),
-                              style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Color(0xffffffff)),
+                              style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffffffff)),
                             ),
                           ),
                   ],

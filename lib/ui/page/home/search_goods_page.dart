@@ -23,11 +23,11 @@ class SearchGoodsPage extends StatefulWidget {
 class _SearchGoodsPageState extends State<SearchGoodsPage> {
   List _tabsTitle = ['全部', '天猫', '店铺'];
   List<String> recomendWords = [];
-  TextEditingController _keywordsTextEditingController = TextEditingController();
+  TextEditingController _keywordsTextEditingController =
+      TextEditingController();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _keywordsTextEditingController.text = widget.keywords;
@@ -70,7 +70,8 @@ class _SearchGoodsPageState extends State<SearchGoodsPage> {
                       textEditingController: _keywordsTextEditingController,
                       isShowLeading: false,
                       onSubmitted: (value) {
-                        NavigatorUtils.gotoSearchGoodsResultPage(context, value);
+                        NavigatorUtils.gotoSearchGoodsResultPage(
+                            context, value);
                       },
                       onChanged: (value) {
                         seachTxtChanged(value);
@@ -97,7 +98,8 @@ class _SearchGoodsPageState extends State<SearchGoodsPage> {
                   child: (recomendWords.length == 0
                       ? _buildContentWidget()
                       : RecomendListWidget(recomendWords, onItemTap: (value) {
-                          NavigatorUtils.gotoSearchGoodsResultPage(context, value);
+                          NavigatorUtils.gotoSearchGoodsResultPage(
+                              context, value);
                         })))
             ],
           )),
