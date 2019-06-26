@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_taobao/common/dao/app_dao.dart';
 import 'package:flutter_taobao/common/data/home.dart';
@@ -50,16 +48,16 @@ class PageTwo extends StatelessWidget {
     return ListView.builder(
       itemExtent: 250.0,
       itemBuilder: (context, index) => Container(
-            padding: EdgeInsets.all(10.0),
-            child: Material(
-              elevation: 4.0,
-              borderRadius: BorderRadius.circular(5.0),
-              color: index % 2 == 0 ? Colors.cyan : Colors.deepOrange,
-              child: Center(
-                child: Text(index.toString()),
-              ),
-            ),
+        padding: EdgeInsets.all(10.0),
+        child: Material(
+          elevation: 4.0,
+          borderRadius: BorderRadius.circular(5.0),
+          color: index % 2 == 0 ? Colors.cyan : Colors.deepOrange,
+          child: Center(
+            child: Text(index.toString()),
           ),
+        ),
+      ),
     );
   }
 }
@@ -69,10 +67,9 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin<HomePage> {
+class _HomePageState extends State<HomePage>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin<HomePage> {
   List<KingKongItem> kingKongItems;
-
-  int _diffScaleNext = 0;
 
   List<TabModel> _tabModels = [];
 
@@ -88,21 +85,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
   Size _sizeRed;
 
   String get hoursString {
-    Duration duration = _animationController.duration * _animationController.value;
+    Duration duration =
+        _animationController.duration * _animationController.value;
     return '${(duration.inHours)..toString().padLeft(2, '0')}';
   }
 
   String get minutesString {
-    Duration duration = _animationController.duration * _animationController.value;
+    Duration duration =
+        _animationController.duration * _animationController.value;
     return '${(duration.inMinutes % 60).toString().padLeft(2, '0')}';
   }
 
   String get secondsString {
-    Duration duration = _animationController.duration * _animationController.value;
+    Duration duration =
+        _animationController.duration * _animationController.value;
     return '${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
-  ScrollController _scrollController = ScrollController();
   ScrollController _scrollViewController;
   GlobalKey _keyFilter = GlobalKey();
 
@@ -136,7 +135,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
@@ -155,8 +153,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
     _tabModels.add(TabModel(title: '时尚', subtitle: '时尚好货'));
 
     //倒计时
-    _animationController = AnimationController(vsync: this, duration: Duration(hours: 10, minutes: 30, seconds: 0));
-    _animationController.reverse(from: _animationController.value == 0.0 ? 1.0 : _animationController.value);
+    _animationController = AnimationController(
+        vsync: this, duration: Duration(hours: 10, minutes: 30, seconds: 0));
+    _animationController.reverse(
+        from: _animationController.value == 0.0
+            ? 1.0
+            : _animationController.value);
 
     initData();
 
@@ -173,12 +175,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
 
     _scrollViewController.dispose();
 
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var v = Column(
       children: <Widget>[
         _buildHotSearchWidget(),
@@ -206,7 +208,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
                 children: <Widget>[v],
               ),
             ),
-            expandedHeight: (_sizeRed == null ? ScreenUtil.screenHeight : _sizeRed.height) + 50.0,
+            expandedHeight:
+                (_sizeRed == null ? ScreenUtil.screenHeight : _sizeRed.height) +
+                    50.0,
             bottom: PreferredSize(
               preferredSize: Size(double.infinity, 46),
               child: GZXTabBarWidget(
@@ -222,7 +226,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : TabBarView(controller: _controller, children: _searchResultListPages()),
+          : TabBarView(
+              controller: _controller, children: _searchResultListPages()),
     );
     return Scaffold(
         backgroundColor: GZXColors.mainBackgroundColor,
@@ -276,25 +281,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
                       height: 20,
                       child: new Material(
                         borderRadius: BorderRadius.circular(10.0),
-//              shadowColor: Colo rs.blue.shade200,
-//              elevation: 5.0,
+//                        shadowColor: Colors.blue.shade200,
+//                        elevation: 5.0,
                         color: Color(0xFFfe8524),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Center(
                             child: Text(
                               item,
-                              style: TextStyle(color: Colors.white, fontSize: 13),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 13),
                             ),
                           ),
                         ),
                       ),
                     ),
                   );
-//            return Text(item);
-//            return _KingKongItemWidget(
-//              item: item,
-//            );
                 }).toList(),
               ),
             ),
@@ -316,31 +318,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
 
         ///
         itemBuilder: (context, index) {
-//                return Image.network(
-//                  _banner_images[index],
-//                  fit: BoxFit.fill,
-//                );
           return GestureDetector(
             onTap: () {
 //              _scrollController.jumpTo(_scrollController.offset +50);
             },
             child: Container(
                 height: 150,
-//        width: 200,
-//                    color: Colors.white,
                 child: ClipPath(
                     clipper: new ArcClipper(),
                     child: Stack(children: <Widget>[
                       Container(
                         height: 150,
-//                  width: double.infinity,
                         child: CachedNetworkImage(
                           fadeOutDuration: const Duration(milliseconds: 300),
                           fadeInDuration: const Duration(milliseconds: 700),
                           fit: BoxFit.fill,
                           imageUrl: banner_images[index],
 //                              placeholder: (context, url) => new CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => new Icon(Icons.error),
+                          errorWidget: (context, url, error) =>
+                              new Icon(Icons.error),
                         ),
                       )
                     ]))),
@@ -375,9 +371,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
 
   Widget _buildSwiperButtonWidget() {
     return Container(
-//      height: 175,
       height: ScreenUtil().L(80) * 2 + 15,
-//      color: Colors.red,
       child: Swiper(
         /// 初始的时候下标位置
         index: 0,
@@ -421,7 +415,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
         },
 
         ///
-        itemCount: (kingKongItems.length / 10).toInt() + (kingKongItems.length % 10 > 0 ? 1 : 0),
+        itemCount: (kingKongItems.length / 10).toInt() +
+            (kingKongItems.length % 10 > 0 ? 1 : 0),
 
         /// 设置 new SwiperPagination() 展示默认分页指示器
         pagination: new SwiperPagination(
@@ -577,7 +572,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: Card(
-//          elevation: 20.0,
         //设置shape，这里设置成了R角
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16.0)),
@@ -589,13 +583,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
             child: Column(
               children: <Widget>[
                 Stack(
-//              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     RecommendFloor(ProductListModel.fromJson(recommendJson)),
                     unReadMsgCountText,
                   ],
                 ),
-                Container(width: ScreenUtil.screenWidth, height: 0.7, color: GZXColors.mainBackgroundColor),
+                Container(
+                    width: ScreenUtil.screenWidth,
+                    height: 0.7,
+                    color: GZXColors.mainBackgroundColor),
                 AnimationHeadlinesWidget(),
               ],
             )),
@@ -604,6 +600,5 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin, Auto
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

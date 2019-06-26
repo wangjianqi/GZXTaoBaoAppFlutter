@@ -35,11 +35,6 @@ class HomeKingKongWidget extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-//          Image.network(
-//            i.picUrl,
-//            width: iconWidth,
-//            height: iconHeight,
-//          ),
           CachedNetworkImage(
             width: iconWidth,
             height: iconHeight,

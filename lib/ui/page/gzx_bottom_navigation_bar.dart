@@ -41,7 +41,6 @@ class _GZXBottomNavigationBarState extends State<GZXBottomNavigationBar> {
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
 
     _bottomNavigationActiveColor = Theme.of(context).primaryColor;
@@ -50,10 +49,7 @@ class _GZXBottomNavigationBarState extends State<GZXBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(width: 360)..init(context);
-//    ScreenUtil.instance = ScreenUtil(width: Klength.designWidth)..init(context);
-
     return Scaffold(
-//      drawer: new HomeDrawer(),
       body: PageView(
         controller: _controller,
         children: <Widget>[
@@ -78,7 +74,6 @@ class _GZXBottomNavigationBarState extends State<GZXBottomNavigationBar> {
           BottomNavigationBarItem(
               icon: Icon(
                 GZXIcons.home,
-//              Icons.message,
                 color: _currentIndex == 0 ? _bottomNavigationActiveColor : _bottomNavigationColor,
               ),
               activeIcon: Icon(
@@ -90,7 +85,6 @@ class _GZXBottomNavigationBarState extends State<GZXBottomNavigationBar> {
           BottomNavigationBarItem(
               icon: Icon(
                 GZXIcons.we_tao,
-//                Icons.message,
                 color: _currentIndex == 1 ? _bottomNavigationActiveColor : _bottomNavigationColor,
               ),
               activeIcon: Icon(
@@ -101,7 +95,6 @@ class _GZXBottomNavigationBarState extends State<GZXBottomNavigationBar> {
           BottomNavigationBarItem(
               icon: Icon(
                 GZXIcons.message,
-//                Icons.message,
                 color: _currentIndex == 2 ? _bottomNavigationActiveColor : _bottomNavigationColor,
               ),
               activeIcon: Icon(
@@ -112,7 +105,6 @@ class _GZXBottomNavigationBarState extends State<GZXBottomNavigationBar> {
           BottomNavigationBarItem(
               icon: Icon(
                 GZXIcons.cart,
-//                Icons.message,
                 color: _currentIndex == 3 ? _bottomNavigationActiveColor : _bottomNavigationColor,
               ),
               activeIcon: Icon(
@@ -123,7 +115,6 @@ class _GZXBottomNavigationBarState extends State<GZXBottomNavigationBar> {
           BottomNavigationBarItem(
               icon: Icon(
                 GZXIcons.my,
-//                Icons.message,
                 color: _currentIndex == 4 ? _bottomNavigationActiveColor : _bottomNavigationColor,
               ),
               activeIcon: Icon(
