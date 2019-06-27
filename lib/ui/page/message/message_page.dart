@@ -1,5 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:flutter_taobao/common/model/conversation.dart';
 import 'package:flutter_taobao/common/services/search.dart';
 import 'package:flutter_taobao/common/style/gzx_style.dart';
@@ -8,8 +10,6 @@ import 'package:flutter_taobao/common/utils/screen_util.dart';
 import 'package:flutter_taobao/ui/widget/GZXUserIconWidget.dart';
 import 'package:flutter_taobao/ui/widget/pull_load/ListState.dart';
 import 'package:flutter_taobao/ui/widget/pull_load/PullLoadWidget.dart';
-import 'dart:math';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class MessagePage extends StatefulWidget {
   @override
@@ -32,24 +32,12 @@ class _MessagePageState extends State<MessagePage>
 
   @override
   Widget build(BuildContext context) {
-    print('_MessagePageState.build');
     super.build(context); // 如果不加这句，从子页面回来会重新加载didChangeDependencies()方法
-//    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-//    final page = ModalRoute.of(context);
-//    page.didPush().then((x) {
-//      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-//    });
-
-// change the status bar color to material color [green-400]
-//    _stat();
-
     var pullLoadWidget = PullLoadWidget(
       pullLoadWidgetControl,
       (BuildContext context, int index) {
         Conversation conversation = pullLoadWidgetControl.dataList[index];
-
         if (index == 0) {
-//          return Container(color: Colors.red,height: 50,);
           return TopItem(
             topBarOpacity: _topBarOpacity,
           );
