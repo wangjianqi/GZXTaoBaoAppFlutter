@@ -20,48 +20,6 @@ import 'package:flutter_taobao/ui/widget/gzx_topbar.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class PageOne extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Image.asset(
-          'static/images/618.png',
-          width: 300.0,
-          fit: BoxFit.contain,
-        ),
-        Image.asset(
-          'static/images/card.png',
-          width: 300.0,
-          fit: BoxFit.contain,
-        ),
-      ],
-    ));
-  }
-}
-
-class PageTwo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemExtent: 250.0,
-      itemBuilder: (context, index) => Container(
-        padding: EdgeInsets.all(10.0),
-        child: Material(
-          elevation: 4.0,
-          borderRadius: BorderRadius.circular(5.0),
-          color: index % 2 == 0 ? Colors.cyan : Colors.deepOrange,
-          child: Center(
-            child: Text(index.toString()),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -84,6 +42,7 @@ class _HomePageState extends State<HomePage>
 
   Size _sizeRed;
 
+  ///倒计时
   String get hoursString {
     Duration duration =
         _animationController.duration * _animationController.value;
@@ -96,6 +55,7 @@ class _HomePageState extends State<HomePage>
     return '${(duration.inMinutes % 60).toString().padLeft(2, '0')}';
   }
 
+  ///倒计时秒
   String get secondsString {
     Duration duration =
         _animationController.duration * _animationController.value;
@@ -136,8 +96,10 @@ class _HomePageState extends State<HomePage>
 
     WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
 
+    ///更新版本
     AppDao.getNewsVersion(context, false);
 
+    ///数据
     kingKongItems = KingKongList.fromJson(menueDataJson['items']).items;
 
     _tabModels.add(TabModel(title: '全部', subtitle: '猜你喜欢'));
@@ -161,7 +123,6 @@ class _HomePageState extends State<HomePage>
 
     _controller = TabController(vsync: this, length: 8);
     _controller.addListener(_handleTabSelection);
-
     _scrollViewController = ScrollController(initialScrollOffset: 0.0);
   }
 
@@ -169,22 +130,25 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     _countdownTimer?.cancel();
     _countdownTimer = null;
-
     _scrollViewController.dispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     ///布局
     var v = Column(
       children: <Widget>[
         _buildHotSearchWidget(),
         _buildSwiperImageWidget(),
         _buildSwiperButtonWidget(),
+
+        ///推荐
         _buildRecommendedCard(),
+
+        ///广告
         _buildAdvertisingWidget(),
       ],
     );
@@ -202,6 +166,7 @@ class _HomePageState extends State<HomePage>
               collapseMode: CollapseMode.pin,
               background: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+
                 ///布局
                 children: <Widget>[v],
               ),
@@ -325,6 +290,8 @@ class _HomePageState extends State<HomePage>
             child: Container(
                 height: 150,
                 child: ClipPath(
+
+                    ///圆弧
                     clipper: new ArcClipper(),
                     child: Stack(children: <Widget>[
                       Container(
@@ -472,6 +439,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  ///联动
   _handleTabSelection() {
 //    if (!_controller.indexIsChanging) {
 //      return;
@@ -579,6 +547,7 @@ class _HomePageState extends State<HomePage>
               children: <Widget>[
                 Stack(
                   children: <Widget>[
+                    ///推荐
                     RecommendFloor(ProductListModel.fromJson(recommendJson)),
                     unReadMsgCountText,
                   ],
@@ -587,6 +556,8 @@ class _HomePageState extends State<HomePage>
                     width: ScreenUtil.screenWidth,
                     height: 0.7,
                     color: GZXColors.mainBackgroundColor),
+
+                ///底部动态文字
                 AnimationHeadlinesWidget(),
               ],
             )),

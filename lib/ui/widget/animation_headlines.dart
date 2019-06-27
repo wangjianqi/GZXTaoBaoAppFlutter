@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_taobao/ui/widget/animation/diff_scale_text.dart';
 import 'package:flutter_taobao/common/data/home.dart';

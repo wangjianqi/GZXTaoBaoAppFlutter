@@ -7,6 +7,7 @@ List<String> banner_images = [
   'https://gw.alicdn.com/imgextra/i1/101/O1CN012LEy4Q1CcIWfvJWbw_!!101-0-lubanu.jpg'
 ];
 
+///数据
 var menueDataJson = {
   "config": {"color": "#555666", "pic_url": ""},
   "items": [

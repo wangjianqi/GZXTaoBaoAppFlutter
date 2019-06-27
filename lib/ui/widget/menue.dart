@@ -8,10 +8,10 @@ class HomeKingKongWidget extends StatelessWidget {
   final String bgurl;
   final String fontColor;
   HomeKingKongWidget({this.data, this.bgurl, this.fontColor});
+
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
-
     double height = ScreenUtil().L(80);
     return Container(
       width: deviceWidth,

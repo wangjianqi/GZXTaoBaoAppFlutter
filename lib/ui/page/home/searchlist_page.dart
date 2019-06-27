@@ -79,7 +79,6 @@ class SearchResultListState extends State<SearchResultListPage>
   _afterLayout(_) {
     _getPositions('_keyFilter', _keyFilter);
     _getSizes('_keyFilter', _keyFilter);
-
     _getPositions('_keyDropDownItem', _keyDropDownItem);
     _getSizes('_keyDropDownItem', _keyDropDownItem);
   }
@@ -164,12 +163,14 @@ class SearchResultListState extends State<SearchResultListPage>
       child: _dropDownItem,
     );
 
+    ///不同页面
     var resultWidget = _isList
         ? GZXSearchResultListWidget(listData,
             getNextPage: () => getSearchList(widget.keyword))
         : GZXSearchResultGridViewWidget(listData,
             getNextPage: () => getSearchList(widget.keyword));
 
+    ///推荐页面
     if (widget.isRecommended) {
       return resultWidget;
     }
@@ -196,6 +197,7 @@ class SearchResultListState extends State<SearchResultListPage>
                             ? Colors.white
                             : GZXColors.mainBackgroundColor,
                         child: NotificationListener<ScrollNotification>(
+                          ///监听滑动
                           onNotification: _onScroll,
                           child: resultWidget,
                         )),
@@ -206,7 +208,6 @@ class SearchResultListState extends State<SearchResultListPage>
             ],
           ),
         ));
-//    );
   }
 
   bool _onScroll(ScrollNotification scroll) {
@@ -216,7 +217,6 @@ class SearchResultListState extends State<SearchResultListPage>
     // 当前滑动距离
     double currentExtent = scroll.metrics.pixels;
     double maxExtent = scroll.metrics.maxScrollExtent;
-//    print('SearchResultListState._onScroll $currentExtent $maxExtent');
     return false;
   }
 
@@ -228,13 +228,11 @@ class SearchResultListState extends State<SearchResultListPage>
       top = renderBoxRed.size.height;
     }
 
-//    print('SearchResultListState._buildDrapDownWidget ${renderBoxRed.size}' );
     return AnimatedPositioned(
         curve: Curves.fastLinearToSlowEaseIn,
         duration: const Duration(milliseconds: 300),
         width: MediaQuery.of(context).size.width,
         top: top,
-//    top: 50,
         left: 0,
         child: Column(
           children: <Widget>[
@@ -256,21 +254,16 @@ class SearchResultListState extends State<SearchResultListPage>
       renderBoxRed = _keyFilter.currentContext.findRenderObject();
       top = renderBoxRed.size.height;
     }
-//    print('SearchResultListState._buildDrapDownWidget ${renderBoxRed.size}' );
     return Positioned(
         width: MediaQuery.of(context).size.width,
         top: top,
-//    top: 50,
         left: 0,
         child: Column(
           children: <Widget>[
             Container(
               color: Colors.white,
               width: MediaQuery.of(context).size.width,
-//                color: Colors.white,
-//                height: animation.value,
               height: _animation == null ? 0 : _animation.value,
-
               child: _dropDownItem,
             ),
             _mask()
