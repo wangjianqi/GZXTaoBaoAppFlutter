@@ -15,7 +15,7 @@ class GZXSearchCardWidget extends StatefulWidget {
   final bool autofocus;
   final bool isShowSuffixIcon;
   final double elevation;
-   Widget rightWidget;
+  Widget rightWidget;
 
   GZXSearchCardWidget({
     Key key,
@@ -37,23 +37,16 @@ class GZXSearchCardWidget extends StatefulWidget {
 }
 
 class _GZXSearchCardWidgetState extends State<GZXSearchCardWidget> {
-//  TextEditingController textEditingController;
   String _hintText;
   Widget _rightWidget;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
-//    textEditingController = widget.textEditingController;
   }
 
   @override
   Widget build(BuildContext context) {
-//    if (widget.textEditingController == null) {
-//      widget.textEditingController = TextEditingController();
-//    }
     _rightWidget = widget.rightWidget;
     _rightWidget ??= Icon(
       GZXIcons.camera,
@@ -65,16 +58,15 @@ class _GZXSearchCardWidgetState extends State<GZXSearchCardWidget> {
     if (widget.textEditingController == null) {
       widget.textEditingController = TextEditingController();
     }
-
     return searchCard();
   }
 
   Widget searchCard() => Padding(
-//    padding: const EdgeInsets.only(top: 8,bottom: 8),
         padding: const EdgeInsets.only(top: 0, right: 0),
         child: Card(
           elevation: widget.elevation,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))), //设置圆角
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))), //设置圆角
           child: Padding(
             padding: const EdgeInsets.only(top: 0),
             child: Row(
@@ -93,12 +85,8 @@ class _GZXSearchCardWidgetState extends State<GZXSearchCardWidget> {
                     : SizedBox(
                         width: 10,
                       ),
-//               Container(
-//                 color: Colors.red,
-//                 child:
                 Expanded(
                   child: Container(
-//                     color: Colors.red,
                       height: 34,
                       child: TextField(
                         autofocus: widget.autofocus,
@@ -106,13 +94,14 @@ class _GZXSearchCardWidgetState extends State<GZXSearchCardWidget> {
                         focusNode: widget.focusNode,
                         style: TextStyle(fontSize: 13),
                         controller: widget.textEditingController,
-//                        autofocus: true,
-//                    focusNode: _focusNode,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(top: 8),
                           border: InputBorder.none,
                           hintText: _hintText,
-                          suffixIcon: widget.textEditingController.text.length == 0 || !widget.isShowSuffixIcon
+                          suffixIcon: widget
+                                          .textEditingController.text.length ==
+                                      0 ||
+                                  !widget.isShowSuffixIcon
                               ? SizedBox()
                               : Container(
                                   width: 20.0,
@@ -127,33 +116,25 @@ class _GZXSearchCardWidgetState extends State<GZXSearchCardWidget> {
                                       color: Colors.grey[500],
                                       size: 16,
                                     ),
-//onPressed: ,
                                     onPressed: () {
                                       setState(() {
-//                                  textEditingController.clear();
                                         widget.textEditingController.text = '';
                                         widget.onChanged('');
                                       });
-////                                setState(() {
-////                                  _inputText = "";
-////                                  _hasdeleteIcon = (_inputText.isNotEmpty);
-////                                  widget.fieldCallBack(_inputText);
-////                                });
                                     },
                                   ),
                                 ),
                         ),
                         onSubmitted: widget.onSubmitted,
                         onChanged: widget.onChanged,
-//                      onChanged: (value){
-//                        print('_GZXSearchCardWidgetState.searchCard  ${widget.textEditingController.text}');
-//                      },
-//                     ),
                       )),
                 ),
 
-                widget.textEditingController.text.length == 0 || !widget.isShowSuffixIcon
-                    ? Padding(padding: EdgeInsets.only(right: 5), child: _rightWidget)
+                ///rightWidget
+                widget.textEditingController.text.length == 0 ||
+                        !widget.isShowSuffixIcon
+                    ? Padding(
+                        padding: EdgeInsets.only(right: 5), child: _rightWidget)
                     : SizedBox(),
               ],
             ),

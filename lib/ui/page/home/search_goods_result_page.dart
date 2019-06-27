@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_taobao/common/style/gzx_style.dart';
-import 'package:flutter_taobao/common/utils/common_utils.dart';
 import 'package:flutter_taobao/common/utils/navigator_utils.dart';
 import 'package:flutter_taobao/ui/page/drawer/gzx_filter_goods_page.dart';
 import 'package:flutter_taobao/ui/page/home/searchlist_page.dart';
@@ -22,17 +21,15 @@ class _SearchGoodsResultPageState extends State<SearchGoodsResultPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
     _keywordTextEditingController.text = widget.keywords;
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldkey,
+        ///筛选
         endDrawer: GZXFilterGoodsPage(),
         backgroundColor: GZXColors.mainBackgroundColor,
         appBar: PreferredSize(
@@ -48,110 +45,102 @@ class _SearchGoodsResultPageState extends State<SearchGoodsResultPage> {
         body: DefaultTabController(
           length: 4,
           initialIndex: 0,
-          child: Column(
-            children: <Widget>[
-          Row(
-          children: <Widget>[
-            SizedBox(
-            width: 8,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              GZXIcons.back_light,
-              size: 20,
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: GZXSearchCardWidget(
-              isShowLeading: false,
-              isShowSuffixIcon: false,
-              textEditingController: _keywordTextEditingController,
-              onTap: () {
-                NavigatorUtils.gotoSearchGoodsPage(context, keywords: widget.keywords);
-              }
-              ,
-//                  focusNode: _focus,
-            ),
-          ),
-          SizedBox(
-            width: 8,
-          ),
-          Column(
-            children: <Widget>[
-              Container(
-                  height: 16,
-//                          padding: const EdgeInsets.only(left: 8,right: 8,top: 8,bottom: 8),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-//                    color: randomColor(),
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(8)),
-                  padding: EdgeInsets.symmetric(horizontal: 4),
-                  child: Text(
-                    '20',
-                    style: TextStyle(color: Colors.white, fontSize: 10),
-                  )),
-              Container(
-                height: 20,
-                child: GestureDetector(
+          child: Column(children: <Widget>[
+            Row(
+              children: <Widget>[
+                SizedBox(
+                  width: 8,
+                ),
+
+                ///返回键
+                GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
                   },
                   child: Icon(
-                    Icons.more_horiz,
+                    GZXIcons.back_light,
                     size: 20,
                   ),
                 ),
-              )
-            ],
-          ),
-          SizedBox(
-            width: 8,
-          ),
-          ],
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        TabBar(
-//          controller: widget.tabController,
-            indicatorColor: Color(0xFFfe5100),
-            indicatorSize: TabBarIndicatorSize.label,
-            isScrollable: true,
-//          labelColor: KColorConstant.themeColor,
-            labelColor: Color(0xFFfe5100),
-            unselectedLabelColor: Colors.black,
-//          labelPadding: EdgeInsets.only(left: (ScreenUtil.screenWidth-30*3)/4),
-            labelPadding: EdgeInsets.only(left: 30, right: 30),
-//                  labelStyle: TextStyle(fontSize: 1),
-            onTap: (i) {},
-            tabs: _tabsTitle
-                .map((i) =>
-                Text(
-                  i,
-                ))
-                .toList()),
-        SizedBox(
-          height: 8,
-        ),
-        Expanded(
-            child: TabBarView(
-                children: _tabsTitle.map((item){
-                  return SearchResultListPage(
-                    widget.keywords,
-                    isList: true,
-                    isShowFilterWidget: true,
-                    onTapfilter: () {
-                      _scaffoldkey.currentState.openEndDrawer();
+                Expanded(
+                  flex: 1,
+                  child: GZXSearchCardWidget(
+                    isShowLeading: false,
+                    isShowSuffixIcon: false,
+                    textEditingController: _keywordTextEditingController,
+                    onTap: () {
+                      NavigatorUtils.gotoSearchGoodsPage(context,
+                          keywords: widget.keywords);
                     },
-                  );
-                }).toList()
-            ))
-    ]
-    ),));
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Column(
+                  children: <Widget>[
+                    Container(
+                        height: 16,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(8)),
+                        padding: EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          '20',
+                          style: TextStyle(color: Colors.white, fontSize: 10),
+                        )),
+                    Container(
+                      height: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.more_horiz,
+                          size: 20,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            TabBar(
+                indicatorColor: Color(0xFFfe5100),
+                indicatorSize: TabBarIndicatorSize.label,
+                isScrollable: true,
+                labelColor: Color(0xFFfe5100),
+                unselectedLabelColor: Colors.black,
+                labelPadding: EdgeInsets.only(left: 30, right: 30),
+                onTap: (i) {},
+                tabs: _tabsTitle
+                    .map((i) => Text(
+                          i,
+                        ))
+                    .toList()),
+            SizedBox(
+              height: 8,
+            ),
+            Expanded(
+                child: TabBarView(
+                    children: _tabsTitle.map((item) {
+              return SearchResultListPage(
+                widget.keywords,
+                isList: true,
+                isShowFilterWidget: true,
+                onTapfilter: () {
+                  _scaffoldkey.currentState.openEndDrawer();
+                },
+              );
+            }).toList()))
+          ]),
+        ));
   }
 }

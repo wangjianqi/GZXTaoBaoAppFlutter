@@ -12,7 +12,8 @@ class GoodsSortCondition {
   GoodsSortCondition({this.name, this.isSelected}) {}
 }
 
-class SearchResultListPage<T extends ScrollNotification> extends StatefulWidget {
+class SearchResultListPage<T extends ScrollNotification>
+    extends StatefulWidget {
   final String keyword;
   final bool isList;
   final bool isShowFilterWidget;
@@ -32,7 +33,9 @@ class SearchResultListPage<T extends ScrollNotification> extends StatefulWidget 
 }
 
 class SearchResultListState extends State<SearchResultListPage>
-    with AutomaticKeepAliveClientMixin<SearchResultListPage>, SingleTickerProviderStateMixin {
+    with
+        AutomaticKeepAliveClientMixin<SearchResultListPage>,
+        SingleTickerProviderStateMixin {
   SearchResultListModal listData = SearchResultListModal([]);
   int page = 0;
   bool _isList;
@@ -60,12 +63,15 @@ class SearchResultListState extends State<SearchResultListPage>
 
     _isList = widget.isList;
 
-    _controller = new AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
+    _controller = new AnimationController(
+        duration: const Duration(milliseconds: 500), vsync: this);
 
     _goodsSortConditions.add(GoodsSortCondition(name: '综合', isSelected: true));
     _goodsSortConditions.add(GoodsSortCondition(name: '信用', isSelected: false));
-    _goodsSortConditions.add(GoodsSortCondition(name: '价格降序', isSelected: false));
-    _goodsSortConditions.add(GoodsSortCondition(name: '价格升序', isSelected: false));
+    _goodsSortConditions
+        .add(GoodsSortCondition(name: '价格降序', isSelected: false));
+    _goodsSortConditions
+        .add(GoodsSortCondition(name: '价格升序', isSelected: false));
 
     _selectGoodsSortCondition = _goodsSortConditions[0];
   }
@@ -99,12 +105,13 @@ class SearchResultListState extends State<SearchResultListPage>
   Widget build(BuildContext context) {
     super.build(context);
 
+    ///drop下拉选择
     _dropDownItem = ListView.separated(
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       itemCount: _goodsSortConditions.length,
-      // item 的个数
-      separatorBuilder: (BuildContext context, int index) => Divider(height: 1.0),
+      separatorBuilder: (BuildContext context, int index) =>
+          Divider(height: 1.0),
       // 添加分割线
       itemBuilder: (BuildContext context, int index) {
         GoodsSortCondition goodsSortCondition = _goodsSortConditions[index];
@@ -115,11 +122,9 @@ class SearchResultListState extends State<SearchResultListPage>
             }
             goodsSortCondition.isSelected = true;
             _selectGoodsSortCondition = goodsSortCondition;
-
             _hideDropDownItemWidget();
           },
           child: Container(
-//            color: Colors.blue,
             height: 40,
             child: Row(
               children: <Widget>[
@@ -130,7 +135,9 @@ class SearchResultListState extends State<SearchResultListPage>
                   child: Text(
                     goodsSortCondition.name,
                     style: TextStyle(
-                      color: goodsSortCondition.isSelected ? Colors.red : Colors.black,
+                      color: goodsSortCondition.isSelected
+                          ? Colors.red
+                          : Colors.black,
                     ),
                   ),
                 ),
@@ -158,8 +165,10 @@ class SearchResultListState extends State<SearchResultListPage>
     );
 
     var resultWidget = _isList
-        ? GZXSearchResultListWidget(listData, getNextPage: () => getSearchList(widget.keyword))
-        : GZXSearchResultGridViewWidget(listData, getNextPage: () => getSearchList(widget.keyword));
+        ? GZXSearchResultListWidget(listData,
+            getNextPage: () => getSearchList(widget.keyword))
+        : GZXSearchResultGridViewWidget(listData,
+            getNextPage: () => getSearchList(widget.keyword));
 
     if (widget.isRecommended) {
       return resultWidget;
@@ -169,9 +178,9 @@ class SearchResultListState extends State<SearchResultListPage>
         backgroundColor: GZXColors.mainBackgroundColor,
         body: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(16), topRight: Radius.circular(16)),
               color: Colors.white),
-//      color: Colors.red,
           child: Stack(
             children: <Widget>[
               Column(
@@ -183,7 +192,9 @@ class SearchResultListState extends State<SearchResultListPage>
                   ),
                   Expanded(
                     child: Container(
-                        color: _isList ? Colors.white : GZXColors.mainBackgroundColor,
+                        color: _isList
+                            ? Colors.white
+                            : GZXColors.mainBackgroundColor,
                         child: NotificationListener<ScrollNotification>(
                           onNotification: _onScroll,
                           child: resultWidget,
@@ -296,19 +307,22 @@ class SearchResultListState extends State<SearchResultListPage>
     }
   }
 
+  ///drop
   _showDropDownItemWidget() {
-    final RenderBox dropDownItemRenderBox = _keyDropDownItem.currentContext.findRenderObject();
+    final RenderBox dropDownItemRenderBox =
+        _keyDropDownItem.currentContext.findRenderObject();
 
 //    _dropDownHeight = dropDownItemRenderBox.size.height;
     _dropDownHeight = 160;
     _isShowDropDownItemWidget = !_isShowDropDownItemWidget;
     _isShowMask = !_isShowMask;
 
-    _animation = new Tween(begin: 0.0, end: _dropDownHeight).animate(_controller)
-      ..addListener(() {
-        //这行如果不写，没有动画效果
-        setState(() {});
-      });
+    _animation =
+        new Tween(begin: 0.0, end: _dropDownHeight).animate(_controller)
+          ..addListener(() {
+            //这行如果不写，没有动画效果
+            setState(() {});
+          });
 
     if (_animation.status == AnimationStatus.completed) {
       _controller.reverse();
@@ -337,6 +351,7 @@ class SearchResultListState extends State<SearchResultListPage>
                 padding: EdgeInsets.only(left: 20),
                 child: GestureDetector(
                   onTap: () {
+                    ///drop
                     _showDropDownItemWidget();
                   },
                   child: Row(
@@ -349,7 +364,9 @@ class SearchResultListState extends State<SearchResultListPage>
                         ),
                       ),
                       Icon(
-                        !_isShowDropDownItemWidget ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+                        !_isShowDropDownItemWidget
+                            ? Icons.arrow_drop_down
+                            : Icons.arrow_drop_up,
                         color: Colors.red,
                       )
                     ],
@@ -357,7 +374,10 @@ class SearchResultListState extends State<SearchResultListPage>
                 )),
             Text('销量', style: TextStyle(fontSize: 14)),
             Row(
-              children: <Widget>[Text('视频 ', style: TextStyle(fontSize: 14)), Icon(GZXIcons.video, size: 14)],
+              children: <Widget>[
+                Text('视频 ', style: TextStyle(fontSize: 14)),
+                Icon(GZXIcons.video, size: 14)
+              ],
             ),
             GestureDetector(
               onTap: () {
@@ -367,7 +387,6 @@ class SearchResultListState extends State<SearchResultListPage>
                 });
               },
               child: Container(
-//                color: Colors.red,
                 width: 36,
                 height: 34,
                 child: Icon(
@@ -380,9 +399,14 @@ class SearchResultListState extends State<SearchResultListPage>
               child: Padding(
                 padding: EdgeInsets.only(right: 20),
                 child: Row(
-                  children: <Widget>[Text('筛选', style: TextStyle(fontSize: 14)), Icon(GZXIcons.filter, size: 16)],
+                  children: <Widget>[
+                    Text('筛选', style: TextStyle(fontSize: 14)),
+                    Icon(GZXIcons.filter, size: 16)
+                  ],
                 ),
               ),
+
+              ///刷选
               onTap: widget.onTapfilter,
             ),
           ],
@@ -395,6 +419,5 @@ class SearchResultListState extends State<SearchResultListPage>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

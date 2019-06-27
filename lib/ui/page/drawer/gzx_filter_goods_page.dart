@@ -20,7 +20,19 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
 
   List<String> _value = ['轻薄便捷', '商务办公', '家庭影音', '家庭娱乐', '女性定位', '学生'];
   List<String> _value1 = ['尊贵旗舰', '移动工作站', '高清游戏', '炒股理财', '30876.G18'];
-  List<String> _value2 = ['包邮', '天猫', '公益宝贝', '天猫直送', '花呗分期', '赠送运费险', '天猫无忧购', '消费者保障', '全球购', '淘金币抵钱', '通用排序'];
+  List<String> _value2 = [
+    '包邮',
+    '天猫',
+    '公益宝贝',
+    '天猫直送',
+    '花呗分期',
+    '赠送运费险',
+    '天猫无忧购',
+    '消费者保障',
+    '全球购',
+    '淘金币抵钱',
+    '通用排序'
+  ];
   List _value3 = ['65-5130', '5130-1.1万', '1.1万-1.5万'];
   List _value4 = ['10%的选择', '52%的选择', '23%的选择'];
   List<String> _value5 = ['江浙泸', '珠三角', '港澳台', '海外'];
@@ -108,7 +120,16 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
     '无机械硬盘',
     '0'
   ];
-  List<String> _value10 = ['64GB', '32GB', '16g', '16GB', '8GB', '8g', '4GB', '4G'];
+  List<String> _value10 = [
+    '64GB',
+    '32GB',
+    '16g',
+    '16GB',
+    '8GB',
+    '8g',
+    '4GB',
+    '4G'
+  ];
 
   bool _isHideValue1 = true;
   bool _isHideOtherLocation = true;
@@ -119,17 +140,11 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _expansionPanelItems = <ExpansionPanelItem>[
       ExpansionPanelItem(
           headerText: 'Panel A',
-//          body: Container(
-//            padding: EdgeInsets.all(16.0),
-//            width: double.infinity,
-//            child: Image.network('http://pic1.win4000.com/wallpaper/2019-02-15/5c664c46823f8.jpg'),
-//          ),
           body: Container(
             height: 200,
             width: 200,
@@ -167,7 +182,8 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
           body: Container(
             padding: EdgeInsets.all(16.0),
             width: double.infinity,
-            child: Image.network('http://pic1.win4000.com/wallpaper/2019-02-14/5c651084373de.jpg'),
+            child: Image.network(
+                'http://pic1.win4000.com/wallpaper/2019-02-14/5c651084373de.jpg'),
           ),
           isExpanded: false),
       ExpansionPanelItem(
@@ -175,7 +191,8 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
           body: Container(
             padding: EdgeInsets.all(16.0),
             width: double.infinity,
-            child: Image.network('http://pic1.win4000.com/wallpaper/2019-02-14/5c65107a0ee05.jpg'),
+            child: Image.network(
+                'http://pic1.win4000.com/wallpaper/2019-02-14/5c65107a0ee05.jpg'),
           ),
           isExpanded: false)
     ];
@@ -190,13 +207,15 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
         crossAxisSpacing: 6.0,
         childAspectRatio: childAspectRatio,
         padding: EdgeInsets.only(left: 6, right: 6, top: 6),
-//    padding: EdgeInsets.all(6),
         children: items.map((value) {
           return Container(
-//              height: 64.0,
-//              padding: EdgeInsets.only(left: 6, right: 6, top: 6),
-              decoration: BoxDecoration(color: GZXColors.mainBackgroundColor, borderRadius: BorderRadius.circular(3.0)),
-              child: Center(child: Text(value, style: TextStyle(color: Color(0xFF333333), fontSize: 12.0))));
+              decoration: BoxDecoration(
+                  color: GZXColors.mainBackgroundColor,
+                  borderRadius: BorderRadius.circular(3.0)),
+              child: Center(
+                  child: Text(value,
+                      style: TextStyle(
+                          color: Color(0xFF333333), fontSize: 12.0))));
         }).toList());
   }
 
@@ -209,7 +228,8 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
               width: 6,
             ),
             Expanded(
-              child: Text('适应场景', style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
+              child: Text('适应场景',
+                  style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
             ),
             GestureDetector(
               onTap: () {
@@ -218,7 +238,9 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
                 });
               },
               child: Icon(
-                _isHideValue1 ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up,
+                _isHideValue1
+                    ? Icons.keyboard_arrow_down
+                    : Icons.keyboard_arrow_up,
                 color: Colors.grey,
               ),
             ),
@@ -232,16 +254,20 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
           offstage: _isHideValue1,
           child: _typeGridWidget(_value1),
         ),
+
+        ///分割线
         Container(
             margin: EdgeInsets.only(top: 6),
             decoration: BoxDecoration(
-//      color: Colors.red,
-                border: Border(bottom: BorderSide(width: 1, color: GZXColors.mainBackgroundColor)))),
+                border: Border(
+                    bottom: BorderSide(
+                        width: 1, color: GZXColors.mainBackgroundColor)))),
       ],
     );
   }
 
-  Widget _buildGroup1(String title, bool isShowExpansionIcon, List<String> items) {
+  Widget _buildGroup1(
+      String title, bool isShowExpansionIcon, List<String> items) {
     return Column(children: [
       SizedBox(
         height: 6,
@@ -252,7 +278,8 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
             width: 6,
           ),
           Expanded(
-            child: Text(title, style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
+            child: Text(title,
+                style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
           ),
           !isShowExpansionIcon
               ? SizedBox()
@@ -263,7 +290,9 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
                     });
                   },
                   child: Icon(
-                    _isHideValue1 ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up,
+                    _isHideValue1
+                        ? Icons.keyboard_arrow_down
+                        : Icons.keyboard_arrow_up,
                     color: Colors.grey,
                   ),
                 ),
@@ -273,111 +302,104 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
         ],
       ),
       _typeGridWidget(items),
-//      Offstage(
-//        offstage: _isHideValue1,
-//        child: _typeGridWid2(_value1),
-//      ),
       Container(
           margin: EdgeInsets.only(top: 6),
           decoration: BoxDecoration(
-//      color: Colors.red,
-              border: Border(bottom: BorderSide(width: 1, color: GZXColors.mainBackgroundColor))))
+              border: Border(
+                  bottom: BorderSide(
+                      width: 1, color: GZXColors.mainBackgroundColor))))
     ]);
   }
 
   Widget _buildGroup2() {
-    return Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-      SizedBox(
-        height: 6,
-      ),
-      Padding(
-        padding: EdgeInsets.only(left: 6),
-        child: Text('价格区间(元)', style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
-      ),
-      SizedBox(
-        height: 6,
-      ),
-      Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(left: 6, right: 6),
-              height: 25,
-              decoration: BoxDecoration(
-                color: GZXColors.mainBackgroundColor,
-                borderRadius: BorderRadius.circular(15),
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 6,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 6),
+            child: Text('价格区间(元)',
+                style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
+          ),
+          SizedBox(
+            height: 6,
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(left: 6, right: 6),
+                  height: 25,
+                  decoration: BoxDecoration(
+                    color: GZXColors.mainBackgroundColor,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text('最低价',
+                      style: TextStyle(fontSize: 11, color: Colors.grey)),
+                  alignment: Alignment.center,
+                ),
               ),
-              child: Text('最低价', style: TextStyle(fontSize: 11, color: Colors.grey)),
-              alignment: Alignment.center,
+              Container(
+                width: 20,
+                height: 1,
+                color: Colors.grey[500],
+              ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(left: 6, right: 6),
+                  height: 25,
+                  decoration: BoxDecoration(
+                    color: GZXColors.mainBackgroundColor,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text('最高价',
+                      style: TextStyle(fontSize: 11, color: Colors.grey)),
+                  alignment: Alignment.center,
+                ),
+              )
+            ],
+          ),
+          GridView.count(
+            primary: false,
+            shrinkWrap: true,
+            crossAxisCount: 3,
+            mainAxisSpacing: 6.0,
+            crossAxisSpacing: 6.0,
+            childAspectRatio: 2,
+            padding: EdgeInsets.only(left: 6, right: 6, top: 6),
+            children: List.generate(
+              3,
+              (index) {
+                return Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: GZXColors.mainBackgroundColor,
+                        borderRadius: BorderRadius.circular(3.0)),
+                    child: Center(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(_value3[index],
+                            style: TextStyle(
+                                color: Color(0xFF333333), fontSize: 12.0)),
+                        Text(_value4[index],
+                            style: TextStyle(
+                                color: Color(0xFF333333), fontSize: 11.0))
+                      ],
+                    )));
+              },
             ),
           ),
           Container(
-            width: 20,
-            height: 1,
-            color: Colors.grey[500],
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(left: 6, right: 6),
-              height: 25,
+              margin: EdgeInsets.only(top: 6),
               decoration: BoxDecoration(
-                color: GZXColors.mainBackgroundColor,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text('最低价', style: TextStyle(fontSize: 11, color: Colors.grey)),
-              alignment: Alignment.center,
-            ),
-          )
-        ],
-      ),
-      GridView.count(
-        primary: false,
-        shrinkWrap: true,
-        crossAxisCount: 3,
-        mainAxisSpacing: 6.0,
-        crossAxisSpacing: 6.0,
-        childAspectRatio: 2,
-        padding: EdgeInsets.only(left: 6, right: 6, top: 6),
-//    padding: EdgeInsets.all(6),
-        children: List.generate(
-          3,
-          (index) {
-            return Container(
-                alignment: Alignment.center,
-//                height: 164.0,
-                decoration:
-                    BoxDecoration(color: GZXColors.mainBackgroundColor, borderRadius: BorderRadius.circular(3.0)),
-                child: Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(_value3[index], style: TextStyle(color: Color(0xFF333333), fontSize: 12.0)),
-                    Text(_value4[index], style: TextStyle(color: Color(0xFF333333), fontSize: 11.0))
-                  ],
-                )));
-          },
-        ),
-      ),
-//      Offstage(
-//        offstage: _isHideValue1,
-//        child: _typeGridWid2(_value1),
-//      ),
-//    Offstage(offstage: _isHideOtherLocation,child: Container(
-//      child: Column(
-//        children: <Widget>[
-//          Expanded(
-//            child: Text('发货地', style: TextStyle(fontSize: 11, color: Color(0xFF6a6a6a))),
-//          ),
-//          _typeGridWid2(_value5),
-//        ],
-//      ),
-//    ),),
-      Container(
-          margin: EdgeInsets.only(top: 6),
-          decoration: BoxDecoration(
-//      color: Colors.red,
-              border: Border(bottom: BorderSide(width: 1, color: GZXColors.mainBackgroundColor))))
-    ]);
+                  border: Border(
+                      bottom: BorderSide(
+                          width: 1, color: GZXColors.mainBackgroundColor))))
+        ]);
   }
 
   Widget _buildGroup3() {
@@ -389,7 +411,8 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
               width: 6,
             ),
             Expanded(
-              child: Text('发货地', style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
+              child: Text('发货地',
+                  style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
             ),
             GestureDetector(
               onTap: () {
@@ -398,7 +421,9 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
                 });
               },
               child: Icon(
-                _isHideOtherLocation ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up,
+                _isHideOtherLocation
+                    ? Icons.keyboard_arrow_down
+                    : Icons.keyboard_arrow_up,
                 color: Colors.grey,
               ),
             ),
@@ -407,17 +432,16 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
             ),
           ],
         ),
-//        _typeGridWid2(_value),
         Row(
           children: <Widget>[
             SizedBox(
               width: 6,
             ),
             Container(
-//                height: 64.0,
                 padding: EdgeInsets.only(left: 8, top: 6, right: 8, bottom: 6),
-                decoration:
-                    BoxDecoration(color: GZXColors.mainBackgroundColor, borderRadius: BorderRadius.circular(3.0)),
+                decoration: BoxDecoration(
+                    color: GZXColors.mainBackgroundColor,
+                    borderRadius: BorderRadius.circular(3.0)),
                 child: Row(
                   children: <Widget>[
                     Icon(
@@ -428,7 +452,9 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
                     SizedBox(
                       width: 2,
                     ),
-                    Text('深圳', style: TextStyle(color: Color(0xFF333333), fontSize: 12.0)),
+                    Text('深圳',
+                        style: TextStyle(
+                            color: Color(0xFF333333), fontSize: 12.0)),
                   ],
                 )),
             SizedBox(
@@ -444,7 +470,8 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
                 SizedBox(
                   width: 2,
                 ),
-                Text('定位', style: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                Text('定位',
+                    style: TextStyle(color: Colors.grey, fontSize: 12.0)),
               ],
             )
           ],
@@ -457,17 +484,20 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(left: 6, top: 6),
-                  child: Text('区域', style: TextStyle(fontSize: 11, color: Color(0xFF6a6a6a))),
+                  child: Text('区域',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6a6a6a))),
                 ),
                 _typeGridWidget(_value5, childAspectRatio: 3),
                 Padding(
                   padding: EdgeInsets.only(left: 6, top: 6),
-                  child: Text('城市', style: TextStyle(fontSize: 11, color: Color(0xFF6a6a6a))),
+                  child: Text('城市',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6a6a6a))),
                 ),
                 _typeGridWidget(_value6, childAspectRatio: 3),
                 Padding(
                   padding: EdgeInsets.only(left: 6, top: 6),
-                  child: Text('省份', style: TextStyle(fontSize: 11, color: Color(0xFF6a6a6a))),
+                  child: Text('省份',
+                      style: TextStyle(fontSize: 11, color: Color(0xFF6a6a6a))),
                 ),
                 _typeGridWidget(_value7, childAspectRatio: 3),
               ],
@@ -477,8 +507,9 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
         Container(
             margin: EdgeInsets.only(top: 6),
             decoration: BoxDecoration(
-//      color: Colors.red,
-                border: Border(bottom: BorderSide(width: 1, color: GZXColors.mainBackgroundColor)))),
+                border: Border(
+                    bottom: BorderSide(
+                        width: 1, color: GZXColors.mainBackgroundColor)))),
       ],
     );
   }
@@ -494,7 +525,8 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
             width: 6,
           ),
           Expanded(
-            child: Text('我喜欢', style: TextStyle(fontSize: 11, color: Color(0xFF6a6a6a))),
+            child: Text('我喜欢',
+                style: TextStyle(fontSize: 11, color: Color(0xFF6a6a6a))),
           ),
         ],
       ),
@@ -507,12 +539,15 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
             width: 6,
           ),
           Container(
-//                height: 64.0,
               padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(color: GZXColors.mainBackgroundColor, borderRadius: BorderRadius.circular(3.0)),
+              decoration: BoxDecoration(
+                  color: GZXColors.mainBackgroundColor,
+                  borderRadius: BorderRadius.circular(3.0)),
               child: Row(
                 children: <Widget>[
-                  Text('购买过的店', style: TextStyle(color: Color(0xFF333333), fontSize: 12.0)),
+                  Text('购买过的店',
+                      style:
+                          TextStyle(color: Color(0xFF333333), fontSize: 12.0)),
                 ],
               )),
           SizedBox(
@@ -523,12 +558,14 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
       Container(
           margin: EdgeInsets.only(top: 6),
           decoration: BoxDecoration(
-//      color: Colors.red,
-              border: Border(bottom: BorderSide(width: 1, color: GZXColors.mainBackgroundColor)))),
+              border: Border(
+                  bottom: BorderSide(
+                      width: 1, color: GZXColors.mainBackgroundColor)))),
     ]);
   }
 
-  Widget _buildGroup5(String title, List<String> items, bool isHideValue, VoidCallback onTapExpansion) {
+  Widget _buildGroup5(String title, List<String> items, bool isHideValue,
+      VoidCallback onTapExpansion) {
     return Column(
       children: <Widget>[
         SizedBox(
@@ -540,17 +577,15 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
               width: 6,
             ),
             Expanded(
-              child: Text(title, style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
+              child: Text(title,
+                  style: TextStyle(fontSize: 12, color: Color(0xFF6a6a6a))),
             ),
             GestureDetector(
-//              onTap: () {
-//                setState(() {
-//                  isHideValue = !isHideValue;
-//                });
-//              },
               onTap: onTapExpansion,
               child: Icon(
-                isHideValue ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up,
+                isHideValue
+                    ? Icons.keyboard_arrow_down
+                    : Icons.keyboard_arrow_up,
                 color: Colors.grey,
               ),
             ),
@@ -566,8 +601,9 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
         Container(
             margin: EdgeInsets.only(top: 6),
             decoration: BoxDecoration(
-//      color: Colors.red,
-                border: Border(bottom: BorderSide(width: 1, color: GZXColors.mainBackgroundColor)))),
+                border: Border(
+                    bottom: BorderSide(
+                        width: 1, color: GZXColors.mainBackgroundColor)))),
       ],
     );
   }
@@ -581,15 +617,16 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
     var i = 0;
     doi(i);
     print('doi${i}');
+
     return Container(
       margin: EdgeInsets.only(left: ScreenUtil.screenWidth / 4, top: 0),
       color: Colors.white,
       height: ScreenUtil.screenHeight,
-//      padding: EdgeInsets.only(top: ScreenUtil.statusBarHeight),
       child: Column(
         children: <Widget>[
           Expanded(
-            child: ListView(primary: false, shrinkWrap: true, children: <Widget>[
+            child:
+                ListView(primary: false, shrinkWrap: true, children: <Widget>[
               _buildGroup(),
               _buildGroup1('折扣和服务', false, _value2),
               _buildGroup2(),
@@ -618,13 +655,13 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Container(
-//            margin: EdgeInsets.only(left: 6, right: 6),
-                  padding: EdgeInsets.only(left: 25, top: 6, right: 25, bottom: 6),
+                  padding:
+                      EdgeInsets.only(left: 25, top: 6, right: 25, bottom: 6),
                   height: 34,
-//                  width: 44,
                   decoration: BoxDecoration(
                     color: Color(0xFFfea000),
-                    borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
+                    borderRadius:
+                        BorderRadius.horizontal(left: Radius.circular(20)),
                   ),
                   child: Text(
                     '重置',
@@ -634,14 +671,16 @@ class _GZXFilterGoodsPageState extends State<GZXFilterGoodsPage> {
                   alignment: Alignment.centerLeft,
                 ),
                 Container(
-//            margin: EdgeInsets.only(left: 6, right: 6),
-                  padding: EdgeInsets.only(left: 25, top: 6, right: 25, bottom: 6),
+                  padding:
+                      EdgeInsets.only(left: 25, top: 6, right: 25, bottom: 6),
                   height: 34,
                   decoration: BoxDecoration(
                     color: Color(0xFFfe7201),
-                    borderRadius: BorderRadius.horizontal(right: Radius.circular(20)),
+                    borderRadius:
+                        BorderRadius.horizontal(right: Radius.circular(20)),
                   ),
-                  child: Text('确定', style: TextStyle(fontSize: 15, color: Colors.white)),
+                  child: Text('确定',
+                      style: TextStyle(fontSize: 15, color: Colors.white)),
                   alignment: Alignment.centerLeft,
                 ),
                 SizedBox(

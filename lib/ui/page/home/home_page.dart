@@ -178,6 +178,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    ///布局
     var v = Column(
       children: <Widget>[
         _buildHotSearchWidget(),
@@ -200,8 +201,8 @@ class _HomePageState extends State<HomePage>
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.pin,
               background: Column(
-//                  key: _keyFilter,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                ///布局
                 children: <Widget>[v],
               ),
             ),
@@ -226,6 +227,8 @@ class _HomePageState extends State<HomePage>
           : TabBarView(
               controller: _controller, children: _searchResultListPages()),
     );
+
+    ///首页
     return Scaffold(
         backgroundColor: GZXColors.mainBackgroundColor,
         appBar: PreferredSize(
@@ -243,9 +246,9 @@ class _HomePageState extends State<HomePage>
                 key: _keyFilter,
               ),
             ),
-            GZXTopBar(
-              searchHintTexts: searchHintTexts,
-            ),
+
+            ///搜索
+            GZXTopBar(searchHintTexts: searchHintTexts),
             Expanded(child: body),
           ],
         ));
@@ -492,7 +495,6 @@ class _HomePageState extends State<HomePage>
     }
     return pages;
   }
-
 
   bool _onScroll(ScrollNotification scroll) {
     return false;
