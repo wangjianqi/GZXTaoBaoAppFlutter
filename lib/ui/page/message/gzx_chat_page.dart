@@ -297,6 +297,7 @@ class ChatContentView extends StatelessWidget {
                       )
                     ],
                   )),
+                  ///头像
                   userImage
                 ],
               ),

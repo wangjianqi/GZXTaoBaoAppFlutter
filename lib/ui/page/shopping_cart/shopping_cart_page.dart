@@ -63,7 +63,6 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
 
   @override
   Widget build(BuildContext context) {
-    print('_MessagePageState.build');
     super.build(context); // 如果不加这句，从子页面回来会重新加载didChangeDependencies()方法
 
     var firstItemWidget = GZXShoppingCarItemWidget(
@@ -258,6 +257,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage>
       }
     }
 
+    ///build
     return SafeArea(
       child: Column(
         children: <Widget>[
