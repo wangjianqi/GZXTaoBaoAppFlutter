@@ -25,6 +25,7 @@ class NavigatorUtils {
         ));
   }
 
+  ///消息
   static Future gotoGZXChatPage(BuildContext context, conversation) {
     return NavigatorRouter(
         context,

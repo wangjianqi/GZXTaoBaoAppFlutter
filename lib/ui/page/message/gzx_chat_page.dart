@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
-import 'package:flutter_taobao/common/data/home.dart';
 import 'package:flutter_taobao/common/data/message.dart';
 import 'package:flutter_taobao/common/model/conversation.dart';
 import 'package:flutter_taobao/common/style/gzx_style.dart';
-import 'package:flutter_taobao/common/utils/navigator_utils.dart';
 import 'package:flutter_taobao/ui/widget/GZXUserIconWidget.dart';
 import 'package:flutter_taobao/ui/widget/gzx_search_card.dart';
 
@@ -17,7 +15,8 @@ class GZXChatPage extends StatefulWidget {
   _GZXChatPageState createState() => _GZXChatPageState(conversation);
 }
 
-class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin {
+class _GZXChatPageState extends State<GZXChatPage>
+    with TickerProviderStateMixin {
   Conversation _conversation;
 
   _GZXChatPageState(this._conversation);
@@ -26,32 +25,37 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
 
     ChatItem message = new ChatItem(
-        _conversation.describtion, 1, new AnimationController(vsync: this, duration: Duration(milliseconds: 500)));
+        _conversation.describtion,
+        1,
+        new AnimationController(
+            vsync: this, duration: Duration(milliseconds: 500)));
     items.add(message);
     message.animationController.forward();
   }
 
   @override
   void dispose() {
-    for (ChatItem message in items) message.animationController.dispose(); //  释放动效
+    for (ChatItem message in items)
+      message.animationController.dispose(); //  释放动效
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('_GZXChatPageState.build');
     final controller = TextEditingController();
     //定义发送文本事件的处理函数
     void _handleSubmitted(String text) {
       if (controller.text.length > 0) {
         controller.clear(); //清空输入框
-        ChatItem message =
-            new ChatItem(text, 0, new AnimationController(vsync: this, duration: Duration(milliseconds: 500)));
+        ChatItem message = new ChatItem(
+            text,
+            0,
+            new AnimationController(
+                vsync: this, duration: Duration(milliseconds: 500)));
         //状态变更，向聊天记录中插入新记录
         setState(() {
           items.add(message);
@@ -66,6 +70,8 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
         brightness: Brightness.light,
         centerTitle: true,
         titleSpacing: 0,
+
+        ///返回
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);
@@ -80,15 +86,14 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
           style: GZXConstant.appBarTitleBlackTextStyle,
         ),
         elevation: 0.0,
-//        textTheme: TextTheme(),
         actions: [
           Row(
             children: <Widget>[
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                    gradient: GZXColors.primaryGradient, borderRadius: BorderRadius.all(Radius.circular(10))),
-//                height: 30,
+                    gradient: GZXColors.primaryGradient,
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: Text(
                   '店铺',
                   style: TextStyle(fontSize: 11),
@@ -109,10 +114,12 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
         color: Color(0xFFe4e5e4),
         child: Column(
           children: <Widget>[
+            ///消息
             Expanded(
                 child: ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return ChatContentView(chatItem: items[index], conversation: _conversation);
+                return ChatContentView(
+                    chatItem: items[index], conversation: _conversation);
               },
               itemCount: items.length,
             )),
@@ -120,17 +127,14 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
               height: 1.0,
               color: Color(0xFFF7F8F8),
             ),
+            ///底部
             Container(
               padding: EdgeInsets.only(left: 8, top: 4, bottom: 3),
-//              padding: EdgeInsets.only(top: 5.0, bottom: 15.0, right: 20.0, left: 15.0),
               color: Color(0xFFf1f1f1),
               child: Column(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-//                      SizedBox(
-//                        width: 10,
-//                      ),
                       Text(
                         '我想',
                         style: TextStyle(color: Colors.black54, fontSize: 13),
@@ -140,7 +144,8 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
                           scrollDirection: Axis.horizontal,
                           padding: EdgeInsets.symmetric(horizontal: 0),
                           child: Row(
-                            children: chatRecommendedOperatings.map((String item) {
+                            children:
+                                chatRecommendedOperatings.map((String item) {
                               return GestureDetector(
                                 onTap: () {
 //                                  NavigatorUtils.gotoSearchGoodsResultPage(context, item);
@@ -149,19 +154,22 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
                                   margin: EdgeInsets.all(4),
                                   height: 20,
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: Color(0xFFbfbfbe), width: 1),
-                                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                                      border: Border.all(
+                                          color: Color(0xFFbfbfbe), width: 1),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
                                   child: new Material(
                                     borderRadius: BorderRadius.circular(10.0),
-//              shadowColor: Colo rs.blue.shade200,
-//              elevation: 5.0,
                                     color: Color(0xFFf2f1f1),
                                     child: Padding(
-                                      padding: const EdgeInsets.only(left: 8, right: 8),
+                                      padding: const EdgeInsets.only(
+                                          left: 8, right: 8),
                                       child: Center(
                                         child: Text(
                                           item,
-                                          style: TextStyle(color: Colors.black54, fontSize: 13),
+                                          style: TextStyle(
+                                              color: Colors.black54,
+                                              fontSize: 13),
                                         ),
                                       ),
                                     ),
@@ -180,6 +188,7 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
                       SizedBox(
                         width: 6,
                       ),
+                      ///输入框
                       Expanded(
                         child: GZXSearchCardWidget(
                           textEditingController: controller,
@@ -189,12 +198,11 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
                           isShowSuffixIcon: false,
                           onSubmitted: _handleSubmitted,
                           onChanged: (value) {
-                            print('_GZXSearchCardWidgetState.searchCard  ${controller.text}');
+                            print(
+                                '_GZXSearchCardWidgetState.searchCard  ${controller.text}');
                           },
                           rightWidget: Icon(
                             GZXIcons.emoji,
-//                            color: Colors.grey,
-//                            size: 2,
                           ),
                         ),
                       ),
@@ -207,7 +215,8 @@ class _GZXChatPageState extends State<GZXChatPage> with TickerProviderStateMixin
                             height: 24,
                             decoration: BoxDecoration(
                                 gradient: GZXColors.primaryGradient,
-                                borderRadius: BorderRadius.all(Radius.circular(12))),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12))),
                             alignment: Alignment.center,
                             child: Icon(
                               GZXIcons.add_light,
@@ -236,23 +245,29 @@ class ChatContentView extends StatelessWidget {
   final ChatItem chatItem;
   final Conversation conversation;
 
-  ChatContentView({Key key, this.chatItem, this.conversation}) : super(key: key);
+  ChatContentView({Key key, this.chatItem, this.conversation})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // 头像组件
     Widget userImage = new GZXUserIconWidget(
-        padding:
-            EdgeInsets.only(top: 0.0, right: (chatItem.type == 0 ? 0.0 : 5.0), left: (chatItem.type == 0 ? 5.0 : 0.0)),
+        padding: EdgeInsets.only(
+            top: 0.0,
+            right: (chatItem.type == 0 ? 0.0 : 5.0),
+            left: (chatItem.type == 0 ? 5.0 : 0.0)),
         width: 35.0,
         height: 35.0,
-        image: chatItem.type == 0 ? 'static/images/default_nor_avatar.png' : conversation.avatar,
+        image: chatItem.type == 0
+            ? 'static/images/default_nor_avatar.png'
+            : conversation.avatar,
         isNetwork: (chatItem.type == 1 && conversation.isNetwork),
         onPressed: () {
           // NavigatorUtils.goPerson(context, eventViewModel.actionUser);
         });
     return SizeTransition(
-      sizeFactor: CurvedAnimation(parent: this.chatItem.animationController, curve: Curves.easeOutCirc),
+      sizeFactor: CurvedAnimation(
+          parent: this.chatItem.animationController, curve: Curves.easeOutCirc),
       axisAlignment: 0.0,
       child: chatItem.type == 0
           ? Container(
@@ -266,9 +281,9 @@ class ChatContentView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 5.0),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 5.0),
                         decoration: BoxDecoration(
-                          //image: DecorationImage(image: AssetImage('static/images/chat_bg.png'), fit: BoxFit.fill),
                           borderRadius: BorderRadius.all(
                             Radius.circular(5.0),
                           ),
@@ -297,7 +312,8 @@ class ChatContentView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 5.0),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 5.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(
                               Radius.circular(5.0),
