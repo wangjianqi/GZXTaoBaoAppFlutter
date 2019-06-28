@@ -34,6 +34,7 @@ class ScreenUtil {
     _pixelRatio = mediaQuery.devicePixelRatio;
     _screenWidth = mediaQuery.size.width;
     _screenHeight = mediaQuery.size.height;
+    ///状态栏高度
     _statusBarHeight = mediaQuery.padding.top;
     _bottomBarHeight = _mediaQueryData.padding.bottom;
     _textScaleFactor = mediaQuery.textScaleFactor;

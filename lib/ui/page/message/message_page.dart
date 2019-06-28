@@ -61,6 +61,7 @@ class _MessagePageState extends State<MessagePage>
                 SizedBox(
                   height: 16,
                 ),
+                ///header
                 Row(
                   children: <Widget>[
                     SizedBox(
@@ -379,6 +380,7 @@ class TopItem extends StatelessWidget {
       color: Colors.white,
       height: ScreenUtil.screenHeight / 4 + 14,
       child: Stack(children: <Widget>[
+        ///背景色
         AnimatedPositioned(
             curve: Curves.easeInOut,
             duration: const Duration(milliseconds: 500),
@@ -393,6 +395,7 @@ class TopItem extends StatelessWidget {
 
         ///透明度
         Opacity(
+          ///透明度变化
           opacity: topBarOpacity,
           child: Container(
             height: _topBarHeight,
@@ -420,6 +423,9 @@ class TopItem extends StatelessWidget {
                     radius: 10,
                     backgroundColor: Color(0xFFfea54e),
                     child: GestureDetector(
+                      onTap: () {
+
+                      },
                       child: Icon(
                         GZXIcons.clear,
                         color: Colors.white,
@@ -431,6 +437,7 @@ class TopItem extends StatelessWidget {
               ),
             )),
         Positioned(
+          ///底部
           bottom: -6,
           width: ScreenUtil.screenWidth,
           height: 105,
@@ -491,6 +498,7 @@ class TopItem extends StatelessWidget {
                 )
               ],
             ),
+            ///badge
             Positioned(
               top: 10,
               right: 0,
@@ -649,6 +657,7 @@ class _ConversationItem extends StatelessWidget {
         onPressed: () {
           NavigatorUtils.gotoGZXChatPage(context, conversation)
               .whenComplete(() {
+                ///设置状态栏
             FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
           });
         },
