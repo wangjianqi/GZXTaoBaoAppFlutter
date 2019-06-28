@@ -7,7 +7,6 @@ import 'package:flutter_taobao/common/utils/common_utils.dart';
 
 import 'gzx_checkbox.dart';
 import 'gzx_quantity_widget.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 typedef AddTop<T> = void Function(T value);
 typedef RemoveTop<T> = void Function(T value);
@@ -36,7 +35,6 @@ class GZXShoppingCarItemWidget extends StatelessWidget {
     var body = Container(
       padding: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
       color: color,
-//            child: _ConversationItem(conversation: pullLoadWidgetControl.dataList[index]
       child: Card(
         elevation: 0,
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12.0))),
@@ -75,6 +73,7 @@ class GZXShoppingCarItemWidget extends StatelessWidget {
                       ],
                     ),
                   ),
+                  ///领券
                   !shoppingCartModel.hasCoupons
                       ? Container()
                       : Expanded(
@@ -89,22 +88,7 @@ class GZXShoppingCarItemWidget extends StatelessWidget {
                         ))
                 ],
               ),
-//              Container(
-//                width: 300,
-//                child:
-//              GZXOrderWidget(
-//                orderModel: OrderModel(
-//                    'https://img.alicdn.com/bao/uploaded/i5/TB1trAMNQPoK1RjSZKb.LB1IXXa_101123.jpg_80x80.jpg',
-//                    '【旗舰新品 稀缺货源】Huawei/华为 P30全面屏超感光徕卡三摄变焦',
-//                    '4G全网通;天空之境;官方标配;8+64GB',
-//                    2,
-//                    3988,
-//                    1),
-//                shoppingCartModel: shoppingCartModel,
-//                addTap: addTap,
-//                removeTap: removeTap,
-//              ),
-//              )
+              ///宝贝
               ListView(
                 primary: false,
                 shrinkWrap: true,
@@ -202,16 +186,10 @@ class GZXOrderWidget extends StatelessWidget {
         width: 14,
       ),
       Expanded(
-//        child: Container(
-//          height: 200,
-//          width: 200,
-//          color: Colors.black,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-//              Expanded(
-//                child:
             Text(
               orderModel.title,
               style: TextStyle(fontSize: 12),
@@ -243,6 +221,7 @@ class GZXOrderWidget extends StatelessWidget {
               height: 4,
             ),
 
+            ///天猫无忧购
             shoppingCartModel.hasTmallEasyBuy
                 ? SizedBox()
                 : Image.asset(
@@ -255,6 +234,7 @@ class GZXOrderWidget extends StatelessWidget {
               height: 4,
             ),
 
+            ///限购
             orderModel.amountPurchasing == 0
                 ? SizedBox()
                 : Text(
@@ -268,6 +248,7 @@ class GZXOrderWidget extends StatelessWidget {
               height: 4,
             ),
 
+            ///价格
             Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
               Text(
                 '￥',
@@ -275,7 +256,6 @@ class GZXOrderWidget extends StatelessWidget {
               ),
               Text(
                 '${CommonUtils.removeDecimalZeroFormat(orderModel.price)}',
-//                          '27.5',
                 style: TextStyle(fontSize: 14, color: Color(0xFFff5410)),
               ),
               SizedBox(
@@ -284,6 +264,7 @@ class GZXOrderWidget extends StatelessWidget {
               Expanded(
                 child: Container(
                   alignment: Alignment.centerRight,
+                  ///数量增减
                   child: GZXQuantityWidget(
                     quantity: orderModel.quantity,
                     addTap: addTap,
@@ -292,27 +273,10 @@ class GZXOrderWidget extends StatelessWidget {
                 ),
               )
             ]),
-//              )
           ],
-//          ),
         ),
       )
-//      Container(
-//        width: 200,
-////        padding: EdgeInsets.all(0),
-//        child: Column(
-//          children: <Widget>[
-//            Expanded(
-//              child: Text(
-//                orderModel.title,
-//                style: TextStyle(fontSize: 12),
-//              ),
-//            )
-//          ],
-//        ),
-//      )
     ]);
-
     return Container(
       child: row,
       padding: EdgeInsets.symmetric(

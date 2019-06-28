@@ -29,8 +29,10 @@ class PullLoadWidget extends StatefulWidget {
 class _PullLoadWidgetState extends State<PullLoadWidget> {
   final IndexedWidgetBuilder itemBuilder;
 
+  ///加载更多回调
   final RefreshCallback onLoadMore;
 
+  ///刷新回调
   final RefreshCallback onRefresh;
 
   final Key refreshKey;
@@ -55,6 +57,12 @@ class _PullLoadWidgetState extends State<PullLoadWidget> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   ///根据配置状态返回实际列表数量
@@ -105,9 +113,6 @@ class _PullLoadWidgetState extends State<PullLoadWidget> {
   @override
   Widget build(BuildContext context) {
     return new RefreshIndicator(
-//backgroundColor: Colors.red,
-//      color: Colors.red,
-//
       ///GlobalKey，用户外部获取RefreshIndicator的State，做显示刷新
       key: refreshKey,
 
@@ -117,7 +122,7 @@ class _PullLoadWidgetState extends State<PullLoadWidget> {
         ///保持ListView任何情况都能滚动，解决在RefreshIndicator的兼容问题。
         physics: const AlwaysScrollableScrollPhysics(),
 
-        ///根据状态返回子孔健
+        ///根据状态返回子控件
         itemBuilder: (context, index) {
           return _getItem(index);
         },
@@ -138,10 +143,6 @@ class _PullLoadWidgetState extends State<PullLoadWidget> {
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-//          FlatButton(
-//            onPressed: () {},
-//            child: new Image(image: new AssetImage('static/images/default_img.png'), width: 70.0, height: 70.0),
-//          ),
           Container(
             child: Text('暂无数据', style: TextStyle(color: Color(0xFF121917))),
           ),

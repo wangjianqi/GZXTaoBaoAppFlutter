@@ -4,8 +4,7 @@ import 'dart:convert';
 Future get(String url) async {
   var res = await http.get(url);
   if (res.statusCode == 200) {
-    var body=res.body;
-//    List querys = jsonDecode(res.body);
+    var body = res.body;
     return jsonDecode(body);
   } else {
     return null;
@@ -43,9 +42,9 @@ getSearchResult(String keyworld, [int page = 0]) async {
 
   //  debugPrint(jsonString.replaceAll('\\x2F', '/'));
   var json;
-  try{
+  try {
     json = jsonDecode(jsonString.replaceAll(RegExp(r'\\x..'), '/'));
-  }catch(e){
+  } catch (e) {
     return [];
   }
   return json['data']['searchm']['Paragraph'] as List;

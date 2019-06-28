@@ -51,6 +51,7 @@ class ConversationControlModel {
     return sql.clearTable(table);
   }
 
+  ///插入数据
   Future insert(Conversation conversation) async {
     var response = await sql.insert({'avatar': conversation.avatar, 'name': conversation.title});
     return response;
@@ -67,6 +68,8 @@ class ConversationControlModel {
 }
 
 List<Conversation> mockConversation = [];
+
+///数据源
 List<Conversation> preConversation = [
   const Conversation(avatar: '', title: '', createAt: '', describtion: ''),
   const Conversation(
@@ -125,7 +128,7 @@ class Manager {
     return _instance;
   }
 
-  setSate(bool hasNewData) {
+  setState(bool hasNewData) {
     this._hasNewData = hasNewData;
   }
 

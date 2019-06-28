@@ -55,6 +55,7 @@ class CommonUtils {
     return Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0).withOpacity(1.0);
   }
 
+  ///计算
   static String removeDecimalZeroFormat(double n) {
     return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 1);
   }

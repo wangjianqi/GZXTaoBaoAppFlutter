@@ -30,7 +30,6 @@ class GZXQuantityWidget extends StatelessWidget {
             child: Container(
               alignment: Alignment.center,
               width: 20,
-//              height: 22,
               decoration: BoxDecoration(border: _getRemoveButtonBorder()),
               child: Icon(
                 Icons.remove,
@@ -42,7 +41,6 @@ class GZXQuantityWidget extends StatelessWidget {
           Container(
               alignment: Alignment.center,
               width: 32,
-//              height: 22,
               decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 1)),
               child: Text(
                 '$quantity',
@@ -53,7 +51,6 @@ class GZXQuantityWidget extends StatelessWidget {
             child: Container(
               alignment: Alignment.center,
               width: 20,
-//              height: 22,
               decoration: BoxDecoration(border: _getAddButtonBorder()),
               child: Icon(
                 Icons.add,

@@ -7,6 +7,7 @@ class GZXCheckbox extends StatefulWidget {
   final ValueChanged<bool> onChanged;
   final bool value;
 
+  ///复选框
   const GZXCheckbox(
       {Key key,
       @required this.value = true,

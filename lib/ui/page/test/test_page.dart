@@ -116,7 +116,7 @@ class _TestPageState extends State<TestPage>
         arr.add(Conversation.fromJson(response['results'][i]));
         await _conversationControlModel.insert(Conversation.fromJson(response['results'][i]));
       }
-      manager.setSate(true);
+      manager.setState(true);
       setState(() {
         mockConversation.addAll(arr);
       });

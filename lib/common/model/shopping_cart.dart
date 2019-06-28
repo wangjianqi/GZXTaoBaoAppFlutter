@@ -7,6 +7,7 @@ class ShoppingCartModel {
   ShopType shopType;
   List<OrderModel> orderModels;
   String discounts;
+  ///选择
   bool isSelected;
 
   ShoppingCartModel(this.shopName, this.hasCoupons, this.hasTmallEasyBuy, this.shopType, this.orderModels,

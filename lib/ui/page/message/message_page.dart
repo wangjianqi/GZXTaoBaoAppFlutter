@@ -30,9 +30,7 @@ class _MessagePageState extends State<MessagePage>
   ///生命周期
   @override
   didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-//      FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
-    }
+    if (state == AppLifecycleState.resumed) {}
     super.didChangeAppLifecycleState(state);
   }
 
@@ -45,6 +43,7 @@ class _MessagePageState extends State<MessagePage>
         Conversation conversation = pullLoadWidgetControl.dataList[index];
         if (index == 0) {
           return TopItem(
+            ///设置透明度
             topBarOpacity: _topBarOpacity,
           );
         }
@@ -199,6 +198,7 @@ class _MessagePageState extends State<MessagePage>
   bool _isShowFloatingTopBar = false;
   double _topBarOpacity = 1;
 
+  ///滑动监听
   bool _onScroll(ScrollNotification scroll) {
 //    if (notification is! ScrollNotification) {
 //      // 如果不是滚动事件，直接返回
@@ -206,6 +206,7 @@ class _MessagePageState extends State<MessagePage>
 //    }
 
 //    ScrollNotification scroll = notification as ScrollNotification;
+    ///下滑动
     if (scroll.metrics.axisDirection == AxisDirection.down) {
 //      print('down');
     } else if (scroll.metrics.axisDirection == AxisDirection.up) {
@@ -213,10 +214,9 @@ class _MessagePageState extends State<MessagePage>
     }
     // 当前滑动距离
     double currentExtent = scroll.metrics.pixels;
+
+    ///最大滑动距离
     double maxExtent = scroll.metrics.maxScrollExtent;
-
-    print('当前滑动距离 ${currentExtent} ${currentExtent - _lastScrollPixels}');
-
     //向下滚动
     if (currentExtent - _lastScrollPixels > 0) {
       if (currentExtent >= 0 && _mainGradient == GZXColors.primaryGradient) {
@@ -229,11 +229,7 @@ class _MessagePageState extends State<MessagePage>
         setState(() {
           double opacity = 1 - currentExtent / 20;
           _topBarOpacity = opacity > 1 ? 1 : opacity;
-//          if(_topBarOpacity<0.1){
-//          }
         });
-
-        print('向下滚动 $currentExtent=>$_topBarOpacity');
       } else {
         if (!_isShowFloatingTopBar) {
           setState(() {
@@ -247,28 +243,24 @@ class _MessagePageState extends State<MessagePage>
     if (currentExtent - _lastScrollPixels < 0) {
       if (currentExtent < 0 && _mainGradient != GZXColors.primaryGradient) {
         setState(() {
+          ///背景色
           _mainGradient = GZXColors.primaryGradient;
         });
       }
       if (currentExtent <= 20) {
         setState(() {
+          ///透明度渐变
           double opacity = 1 - currentExtent / 20;
           _topBarOpacity = opacity > 1 ? 1 : opacity;
-//          if(_topBarOpacity>0.9){
+
+          ///不显示
           _isShowFloatingTopBar = false;
-//          }
         });
-        print('往上滚动 $currentExtent=>$_topBarOpacity');
       } else {}
     }
 
+    ///记录滑动偏移
     _lastScrollPixels = currentExtent;
-
-//    if (maxExtent - currentExtent > widget.startLoadMoreOffset) {
-//      // 开始加载更多
-//
-//    }
-
     // 返回false，继续向上传递,返回true则不再向上传递
     return false;
   }
@@ -281,24 +273,17 @@ class _MessagePageState extends State<MessagePage>
 
   @override
   Future<Null> handleRefresh() async {
-//    setState(() {
-//      _mainGradient = const LinearGradient(colors: [Colors.white, Colors.white]);
-//    });
     if (isLoading) {
       return null;
     }
     isLoading = true;
     page = 1;
-////    mockConversation.clear();
-//    mockConversation.addAll(preConversation);
-////    _conversationControlModel.clear();
     await getIndexListData(page);
     setState(() {
       pullLoadWidgetControl.needLoadMore =
           (mockConversation != null && mockConversation.length == 15);
     });
     isLoading = false;
-
     return null;
   }
 
@@ -355,16 +340,20 @@ class _MessagePageState extends State<MessagePage>
       var response = await get('https://randomuser.me/api/?results=10');
       List<Conversation> arr = [];
       for (int i = 0; i < response['results'].length; i++) {
+        ///未读消息数
         response['results'][i]['unReadMsgCount'] =
             i == Random().nextInt(10) ? Random().nextInt(20) : 0;
         arr.add(Conversation.fromJson(response['results'][i]));
         await _conversationControlModel
             .insert(Conversation.fromJson(response['results'][i]));
       }
-      manager.setSate(true);
+      ///有更多数据
+      manager.setState(true);
       setState(() {
         if (page == 1) {
+          ///清除数据
           mockConversation.clear();
+          ///添加数据
           mockConversation.addAll(preConversation);
           _conversationControlModel.clear();
         }
@@ -401,6 +390,8 @@ class TopItem extends StatelessWidget {
                 ),
                 width: ScreenUtil.screenWidth,
                 height: ScreenUtil.screenHeight / 4)),
+
+        ///透明度
         Opacity(
           opacity: topBarOpacity,
           child: Container(
